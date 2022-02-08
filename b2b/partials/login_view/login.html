@@ -1,0 +1,121 @@
+<div class="login-bg" ng-controller="LoginController">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-1">
+         <img src="assets/images/parsel.png" class="logo-sizing header-logo" />
+      </div>
+   </div>
+   <div class="nav-container">
+      <div id="navParsel">
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <form name="loginForm" novalidate>
+      <div class="col-sm-3 col-md-3 col-sm-offset-1 col-md-offset-1 login-form" style="background-color: #FFFFFF;
+         border-radius: 10px;padding: 25px">
+         <div class="row center-align">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <img src="assets/images/login_logo.png" class="img-responsive logo-sizing">
+               </div>
+            </div>
+         </div>
+         <div class="row center-align">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <span>Please login to your account</span>
+               </div>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-md-12">
+               <div class="form-group">
+                  <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                     <input class="form-control inpVal" id="email" type="text" style="border-radius: 8px;" name="email" placeholder="Username" ng-model="email" required>
+                     <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Username is required.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                     <input class="form-control inpVal" id="password" style="border-radius: 8px;" type="password" name="password" placeholder="Password" ng-model="password" required>
+                     <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Password is required.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <button type="button" class="btn btn-block login-btn white-text" ng-click="doLogin()" ng-disabled="loginForm.$invalid"><b>LOGIN</b></button>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-4 loginpage-text">
+         <span>What will you</span><br>
+         <span>deliver today?</span>
+      </div>
+   </form>
+</div>
+<!--div class="overlay overlay-parsel">
+   <nav>
+      <ul>
+         <li><a href="http://parsel.in" target="_blank">Home<span>Tap to deliver</span></a></li>
+         <li><a href="http://parsel.in/api.html" target="_blank">API Integration<span>To get started using parsel API</span></a></li>
+         <li><a href="http://parsel.in/blog/" target="_blank">Blogs<span>Doing the best delivery</span></a></li>
+         <li><a href="http://parsel.in/aboutus.html" target="_blank">About us<span>Something about parsel</span></a></li>
+         <li><a href="http://parsel.in/businesspage.html" target="_blank">Business Page</a></li>
+      </ul>
+   </nav>
+</div -->
+<!--footer class="footer-section">
+   <div class="footer-content">
+      <div class="container-fluid">
+         <div class="row footer-link-list">
+            <div class="col-md-12">
+               <div class="footer-links ">
+                  <ul class="pull-left">
+                     <li><a href="http://parsel.in/aboutus.html" target="_blank">   About us</a></li>
+                     <li><a href="#" target="_blank">FAQ's</a></li>
+                     <li><a href="http://parsel.in/privacy.html" target="_blank">Privacy Policy</a></li>
+                     <li><a href="http://parsel.in/tnc.html" target="_blank">Terms and conditions</a></li>
+                     <li><a href="http://parsel.in/contactus.html" target="_blank">Contact us</a></li>
+                  </ul>
+                  <ul class="pull-left">
+                     <li><a href="http://parsel.in/partnerwithus.html" target="_blank">Partner with us</a></li>
+                     <li><a href="http://parsel.in/deliverwithus.html" target="_blank">Deliver with us</a></li>
+                     <li><a href="#" target="_blank">Career</a></li>
+                     <li><a href="http://parsel.in/api.html" target="_blank">Developers</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-4 col-sm-6">
+            </div>
+            <div class="col-md-4 text-center col-sm-6">
+               <span>&copy; 2018 Parsel, All Rights Reserved</span>
+            </div>
+            <div class="col-md-4 text-right text-sm-center">
+               <ul class="social-links">
+                  <li>
+                     JOIN US ON
+                  </li>
+                  <li>
+                     <a href="https://www.facebook.com/Parsel-930302457043447/timeline/" target="_blank"><img src="assets/images/fb.png" class="social-icon"></a>
+                  </li>
+                  <li>
+                     <a href="https://twitter.com/Parsel_It" target="_blank"><img src="assets/images/tw.png" class="social-icon"></a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</footer -->
+<script src="vendors/menu/classie.js"></script>
+<script src="vendors/menu/menu.js"></script>

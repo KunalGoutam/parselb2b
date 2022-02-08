@@ -1,0 +1,235 @@
+<div class="container body">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="page-title">
+               <div>
+                  <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
+                     <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search by manager email/phone" ng-model="filterText.text">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="getManagerDetails()">SEARCH</button>
+                        </span>
+                        <span class="input-group-btn">
+                        <button class="btn btn-default add_driver_button" type="button" ng-click="addNewManager()">ADD NEW MANAGER</button>
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" ng-show="isManagerSelected">
+                     <div class="x_title">
+                        <h3>Managers</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="col-md-6 col-sm-12 col-xs-12 profile_details" ng-repeat="manager in managers">
+                           <div class="well profile_view col-md-12" style="padding-top: 0px;">
+                              <div class="col-md-12 col-xs-12 bottom">
+                                 <div class="col-md-8 col-xs-12 col-sm-6 emphasis txtHeader">
+                                    <h5>#{{manager.userId}} &nbsp;/&nbsp; {{manager.firstName}} {{manager.lastName}} </h5>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <h5>{{manager.phone}}</h5>
+                                 </div>
+                                 <div class="col-md-2 col-xs-12 col-sm-6 emphasis" style="margin-top: 5px;">
+                                    <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editManagerDetails(manager)"><i class="fa fa-edit"></i> </button>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12 col-md-12">
+                                 <div class="left col-md-12 col-xs-12 col-sm-12">
+                                    <ul class="list-unstyled">
+                                       <li><i class="fa fa-envelope"></i> {{manager.email}} / {{decryptPass(manager.password)}} </li>
+                                       <li><i class="fa fa-map"></i> {{manager.locality}}</li>
+                                       <h5>
+                                          <li> <a ng-click="viewCompletedTripsSummary(manager)" style="cursor: pointer">VIEW COMPLETED TRIPS SUMMARY</a> </li>
+                                       </h5>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12 x_title" ng-show="isCompletedTripsSelected">
+                        <div class="x_title">
+                           <h3>Completed Trips Summary</h3>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div id="tripSummary" style="width:100%;height:350px;"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="delManagerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Manager</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to delete this manager - &nbsp;<label>{{managerInfo}}</label>&nbsp; with &nbsp;<label>manager id - {{managerId}}</label></span>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteManager()">Delete</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="managerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">{{modalHeader}}</h4>
+         </div>
+         <div class="modal-body">
+            <form name="RegistrationForm" novalidate>
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">First Name</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.firstName.$invalid && !RegistrationForm.firstName.$pristine }">
+                                 <input type="text" ng-model="input.firstName" class="form-control" name="firstName" required>
+                                 <p ng-show="RegistrationForm.firstName.$invalid && !RegistrationForm.firstName.$pristine" class="help-block">FirstName is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <label>Last Name</label>
+                           <div class="form-group">
+                              <input type="text" ng-model="input.lastName" class="form-control" name="lastName">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Email</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.email.$invalid && !RegistrationForm.email.$pristine }">
+                                 <input type="text" ng-model="input.email" class="form-control" name="email" required>
+                                 <p ng-show="RegistrationForm.email.$invalid && !RegistrationForm.email.$pristine" class="help-block">Email is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Phone Number</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.phone.$invalid && !RegistrationForm.phone.$pristine }">
+                                 <input type="number" ng-model="input.phone" class="form-control" name="phone" required>
+                                 <p ng-show="RegistrationForm.phone.$invalid && !RegistrationForm.phone.$pristine" class="help-block">Phone Number is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Password</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.password.$invalid && !RegistrationForm.password.$pristine }">
+                                 <input type="text" ng-model="input.password" class="form-control" name="password" required>
+                                 <p ng-show="RegistrationForm.password.$invalid && !RegistrationForm.password.$pristine" class="help-block">Password is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Select Manager Type</label>
+                              <div class="form-group">
+                                 <select ng-model="input.manager" ng-init="input.manager = manager[0]"  class="form-control" ng-options="manager for manager in manager_types">                                 
+                                 </select>
+                                 <p ng-show="RegistrationForm.pan.$invalid && !RegistrationForm.pan.$pristine" class="help-block">PanNo is required.</p>
+                              </div>
+                           </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-6">
+                           <label id="req">Select Manager Type</label>
+                           <div class="form-group">
+                              <select ng-model="input.manager"  ng-selected= "manager_types[0]" class="form-control" ng-options="manager.value as manager.name for manager in manager_types">
+                              </select>
+                           </div>
+                        </div>   -->
+                        
+                        <div class="col-md-6">
+                           <label id="req">Select Manager Type</label>
+                           <div class="form-group">
+                              <select ng-model="input.manager" class="form-control" ng-options="manager.name for manager in manager">
+                              </select>
+                           </div>
+                        </div>
+                        
+                       
+                     
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label id="req">Select Dc</label>
+                           <div class="form-group">
+                              <select ng-model="input.city" class="form-control" ng-options="city.name for city in cities">
+                              </select>
+
+
+                              <div ng-dropdown-multiselect="" options="example14data" selected-model="example14model" 
+                              checkboxes="true" extra-settings="setting1"></div >
+
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Employee Id</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.gst.$invalid && !RegistrationForm.gst.$pristine }">
+                                 <input type="number" ng-model="input.gst" class="form-control" name="gst" required>
+                                 <p ng-show="RegistrationForm.gst.$invalid && !RegistrationForm.gst.$pristine" class="help-block">GST No is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Vendor ID</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.vendorId.$invalid && !RegistrationForm.vendorId.$pristine }">
+                                 <input type="text" ng-model="input.vendorId" class="form-control" name="vendorId" required>
+                                 <p ng-show="RegistrationForm.vendorId.$invalid && !RegistrationForm.vendorId.$pristine" class="help-block">VendorId is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                              <label id="req">Vendor Email</label>
+                              <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.vemail.$invalid && !RegistrationForm.vemail.$pristine }">
+                                 <input type="number" ng-model="input.vemail" class="form-control" name="vemail" required>
+                                 <p ng-show="RegistrationForm.vemail.$invalid && !RegistrationForm.vemail.$pristine" class="help-block">Vendor Email is required.</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="RegistrationForm.$invalid" ng-click="saveManagerDetails()">{{footerText}}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteManagerDetails(selectedManager.manager)">Delete</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+   
+</div>
+<script src="js/utils/custom.js"></script>

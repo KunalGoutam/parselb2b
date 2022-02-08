@@ -1,0 +1,79 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped" st-table="shipments" st-pipe="viewReturnedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div>Delivery ID</div>
+            </th>
+            <th>
+               <div>Driver Name</div>
+               <div class="blue-text">Driver ID</div>
+            </th>
+            <th>
+               <div>SKU</div>
+               <div class="blue-text">Picked Quantity</div>
+            </th>
+            <th>
+               <div>Returned Quantity</div>
+            </th>
+            <th>
+               <div>Picked From Distributor</div>
+               <div class="blue-text">Store Name</div>
+            </th>
+            <th>
+               <div>Returned To Distributor</div>
+               <div class="blue-text">Store Name</div>
+            </th>
+            <th>
+               <div>Delivery Status</div>
+               <div class="blue-text">TimeStamp</div>
+            </th>
+            <th>
+               <div>Reason for Return</div>
+            </th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div>{{job.shipmentId}}</div>
+            </td>
+            <td>
+               <div>{{job.driverFirstName}} {{job.driverLastName}}</div>
+               <div class="blue-text">{{job.driverId}}</div>
+            </td>
+            <td>
+               <div>{{job.sku}}</div>
+               <div class="blue-text">{{job.pickedQty}}</div>
+            </td>
+            <td class="edit-td">
+               <!--input type = "text" ng-model="job.returnQty" class="edit-input"/-->
+               <div>{{job.returnQty}}</div>
+            </td>
+            <td>
+               <div>{{job.pickedStoreName}}</div>
+               <div class="blue-text">{{job.pickedStoreName}}</div>
+            </td>
+            <td class="edit-td">
+               <div>{{job.returnStoreName}}</div>
+               <!--input type = "text" ng-model="job.returnSapCode" class="edit-input"/-->
+               <div class="blue-text">{{job.returnStoreName}}</div>
+            </td>
+            <td>
+               <div>{{job.deliveryStatus}}</div>
+               <div class="blue-text">{{job.ts}}</div>
+            </td>
+            <td>
+               <div>{{job.reason}}</div>
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>

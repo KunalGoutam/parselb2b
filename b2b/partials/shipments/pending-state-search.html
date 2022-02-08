@@ -1,0 +1,73 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+               <div >Group Id</div>
+               <div >Delivery Status</div>
+            </th>
+            <th>
+               <div >Driver Name</div>
+               <div >Driver Phone</div>
+            </th>
+            <th>
+               <div >Customer Name</div>
+               <div >Customer Phone</div>
+            </th>
+            <th>
+                <div >Created Time</div>
+                <div >Assigned Time</div>
+            </th>
+            <th>
+                <div >Slot</div>
+            </th>
+            <th>
+                <div >Delivery Date Time</div>
+            </th>
+            <th>
+               <div >ETA</div>
+            </th>
+            <th >Unassign</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+               <div>{{job.shipment.grpId}}</div>
+               <div  ng-if="job.shipment.delieveredStates != null"><i class="fa fa-check"></i></div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.driver.firstName}} {{job.driver.lastName}}</div>
+               <div >{{job.driver.phone}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.createdDateStr}}</div>
+               <div >{{job.shipment.wfDetails.wfValues.ASSIGNED_TIME}}</div>
+            </td>
+            <td style="font-size: 18px;font-weight: bold;">
+                <div>{{job.shipment.slot.startTime}}</div>
+            </td>
+            <td>
+                <div>{{job.shipment.deliveryDate}}</div>
+            </td>
+            <td>
+                <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.wfDetails.eta}}</div> <br>
+            </td>
+            <td>
+                <i class="ff tab-cursor" ng-click="unassignShipmentPU(job)"><img title="Unassign" src="assets/images/unassign_icon.png"></i>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<div ng-include="'partials/shipments/load-details.html'" ng-if="groceries.length > 0"></div>

@@ -1,0 +1,159 @@
+<div class="container body">
+<div class="main_container">
+   <div class="right_col" role="main">
+      <div class="">
+         <div class="clearfix"></div>
+         <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="x_panel">
+                  <div class="x_title">
+                     <h3>Escalation</h3>
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     <div class="row">
+                        <div class="col-md-3 pull-right">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="viewSOSList(tableState)">
+                              Refresh
+                              </button>
+                           </div>
+                        </div>
+                        <div class="col-md-3 pull-right">
+                           <div class="form-group">
+                              <label>Select Date</label>
+                              <div class='input-group date' id='datePicker'>
+                                 <input type='text' class="form-control"/>
+                                 <span class="input-group-addon">
+                                 <span class="glyphicon glyphicon-calendar"></span>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <table class="table table-bordered table-striped hidden-xs hidden-sm" st-safe-src="sosList" st-pipe="viewSOSList" st-table="sosList" id="driverLogContainer">
+                              <thead>
+                                 <tr>
+                                    <th>DC</th>
+                                    <th>
+                                       <div>Driver Name</div>
+                                       <div class="blue-text">Driver Phone</div>
+                                    </th>
+                                    <th>
+                                       <!-- <div>Customer Name</div> -->
+                                       <div class="blue-text">Vehicle No.</div>
+                                    </th>
+                                    <th>
+                                       <div>Route</div>
+                                       <!-- <div class="blue-text">Manager Phone</div> -->
+                                    </th>
+                                    <!-- <th>
+                                       <div>Pickup Point</div>
+                                       <div class="blue-text">Drop Point</div>
+                                    </th> -->
+                                    <!-- <th>Current Location</th> -->
+                                    <th>
+                                       <div>Escalate On</div>
+                                       <!-- <div class="blue-text">Close Botton</div> -->
+                                    </th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-hide = "tr1" id ="tr1">
+                                    <td>Palwal</td>
+                                    <td>
+                                       <div>kamalkant</div>
+                                       <div class="blue-text">8565458985</div>
+                                    </td>
+                                    <td>
+                                     
+                                       <div class="blue-text">MH 02 BE 4577</div>
+                                    </td>
+                                    <td>
+                                       <div>PW</div>
+                                      
+                                    </td>
+                                    <td>
+                                       <div><a href="#" ng-click ="escalationdc('tr1')">Escalate</a></div>
+                                   
+                                    </td>
+                                 </tr>
+                                 <tr ng-hide = "tr2">
+                                    <td>Palwal</td>
+                                    <td>
+                                       <div>Abhay</div>
+                                       <div class="blue-text">8562345985</div>
+                                    </td>
+                                    <td>
+                                     
+                                       <div class="blue-text">MH 02 BE 2377</div>
+                                    </td>
+                                    <td>
+                                       <div>S1</div>
+                                      
+                                    </td>
+                                    <td>
+                                       <div><a href="#" ng-click ="escalationdc('tr2')">Escalate</a></div>
+                                   
+                                    </td>
+                                 </tr>
+                                 <tr ng-hide = "tr3">
+                                    <td>Palwal</td>
+                                    <td>
+                                       <div>Yogendra</div>
+                                       <div class="blue-text">8995458985</div>
+                                    </td>
+                                    <td>
+                                     
+                                       <div class="blue-text">MH 02 BE 3577</div>
+                                    </td>
+                                    <td>
+                                       <div>RE</div>
+                                      
+                                    </td>
+                                    <td>
+                                       <div><a href="#" ng-click ="escalationdc('tr3')">Escalate</a></div>
+                                   
+                                    </td>
+                                 </tr>
+                                 <tr ng-hide = "tr4" >
+                                    <td>Palwal</td>
+                                    <td>
+                                       <div>Manish</div>
+                                       <div class="blue-text">8544458985</div>
+                                    </td>
+                                    <td>
+                                     
+                                       <div class="blue-text">MH 02 BE 4377</div>
+                                    </td>
+                                    <td>
+                                       <div>PR</div>
+                                      
+                                    </td>
+                                    <td>
+                                       <div><a href="#" ng-click ="escalationdc('tr4')">Escalate</a></div>
+                                   
+                                    </td>
+                                 </tr>
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                    <td colspan="7" class="center-align">
+                                       <div st-items-by-page="10" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+                                    </td>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

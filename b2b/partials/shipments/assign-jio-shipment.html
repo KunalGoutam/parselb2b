@@ -1,0 +1,78 @@
+<div id="assignShipmentView">
+   <div class="box-header">
+       <span class="all-header">Assign Shipment</span>
+   </div>
+   <div class="box-body">
+      <div class="row">
+         <div class="col-md-4">
+            <label>Select Driver</label>
+            <div class="form-group">
+               <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled">
+                  <ui-select-match placeholder="Select or search DE">{{$select.selected.firstName}} {{$select.selected.lastName}}</ui-select-match>
+                  <ui-select-choices repeat="driver in drivers | filter: $select.search">
+                     <span ng-bind-html="driver.firstName | highlight: $select.search"></span>
+                     <span ng-bind-html="driver.lastName | highlight: $select.search"></span>
+                  </ui-select-choices>
+               </ui-select>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <label>&nbsp;</label>
+            <div class="form-group">
+               <button class="btn blue-background" ng-click="getUnassignedShipments()">Refresh Delivery Executives and Shipments</button>
+            </div>
+         </div>
+         <div class="col-md-4 pull-right">
+            <label>&nbsp;</label>
+            <div class="form-group valign-center">
+                <label>Total Unassigned Shipments: &nbsp;</label> {{shipmentCount}}
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            <table class="table table-bordered table-striped create-shipment-table" style="height:400px">
+            <thead>
+               <tr>
+                  <th style="width: 5%"></th>
+                  <th style="width: 10%">Delivery ID</th>
+                  <th style="width: 20%">Order Id</th>
+                  <th style="width: 20%">Order Number</th>
+                  <th style="width: 15%" ng-if="appId != 7">Customer Name</th>
+                  <th style="width: 10%" ng-if="appId != 7">Recipient Name</th>
+                  <th style="width: 15%" ng-if="appId != 7">Pickup DateTime</th>
+                  <th style="width: 25%">Drop Point</th>
+                  <th ng-if="appId == 7" style="width: 20%">
+                    <div class="white-text">Slot</div>
+                    <div class="blue-text">Delivery Date Time</div>
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="job in jobs">
+                  <td style="width: 5%"><input type="checkbox" type="checkbox" value="{{job.shipment.shipmentId}}" ng-checked="selectedShipments.indexOf(job.shipment.shipmentId) > -1" ng-click="toggleSelection(job.shipment.shipmentId)"/></td>
+                  <td style="width: 10%">{{job.shipment.shipmentId}}</td>
+                  <td style="width: 20%">{{job.shipment.orderId}}</td>
+                  <td style="width: 20%">{{job.shipment.orderNumber}}</td>
+                  <td style="width: 15%" ng-if="appId != 7">{{job.shipment.carrier.firstName}}</td>
+                  <td style="width: 10%" ng-if="appId != 7">{{job.shipment.dest[0].name}}</td>
+                  <td style="width: 15%" ng-if="appId != 7">{{job.shipment.pickupDate}}</td>
+                  <td style="width: 25%">{{job.shipment.dest[0].address}}</td>
+                  <td ng-if="appId == 7" style="width: 20%">
+                    <div>{{job.shipment.slot.startTime}} - {{job.shipment.slot.stopTime}}</div>
+                    <div class="blue-text">{{job.shipment.deliveryDate}}</div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            <div class="form-group">
+               <button class="btn blue-background pull-right" ng-click="assignShipments()" ng-disabled="drivers.length === 0">Assign Shipments</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="container" style="overflow: auto" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" style="height: 900px">
+                     <div class="x_title">
+                        <h3>Approve Adhoc Route</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Select Date</label>
+                                 <input type="date" class="form-control" ng-model="date.fromDate" ng-change="onLoad()"/>
+                              </div>
+                           </div>
+                           
+                           <div class="col-md-3">
+                           <label>Select Route</label>
+                            <div class="form-group">
+                                             <ui-select ng-model="selectedRoute.route" theme="selectize" ng-disabled="disabled"  ng-change="onRouteChange()">
+                                                <ui-select-match placeholder="Select or search route">{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="route in routes | filter: $select.search">
+                                                   <span ng-bind-html="route | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select>
+                                          </div>
+                           </div>
+                          
+                            <div class="col-md-3">
+                              <!-- <label>Unassigned Shipments: &nbsp;</label> {{shipmentCount}} -->
+                              <label></label>
+                              <label></label>
+                              <div class="form-group">
+                                 <button class="btn btn-block btn-primary" ng-click="getUnassignedShipments()">Approve</button>
+                              </div>
+                           </div>
+                        </div>
+
+                        
+                         <div class="row">
+                            <!-- <div class="col-md-3">
+                           <label>Select DA</label>
+                            <div class="form-group">
+                                             <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled" ng-change="setDriver()">
+                                                <ui-select-match placeholder="Select or search DE">{{$select.selected.firstName}} {{$select.selected.lastName}}</ui-select-match>
+                                                <ui-select-choices repeat="driver in drivers | filter: $select.search">
+                                                   <span ng-bind-html="driver.firstName | highlight: $select.search"></span>
+                                                   <span ng-bind-html="driver.lastName | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select>
+                                          </div>
+                           </div> -->
+
+                           <!-- <div class="col-md-3">
+                           <label>Select Vehicle</label>
+                             <div class="form-group">
+                                             <ui-select ng-model="selectedVehicle.vehicle" theme="selectize" ng-disabled="disabled" ng-change="setVehicle()">
+                                                <ui-select-match placeholder="Select or search Vehicle">{{$select.selected.vehicleNo}}</ui-select-match>
+                                                <ui-select-choices repeat="vehicle in vehicles | filter: $select.search">
+                                                   <span ng-bind-html="vehicle.vehicleNo | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select>
+                                          </div>
+                           </div> -->
+
+                        
+                          
+                           <!-- <div class="col-md-3">
+                              <label>&nbsp;</label>
+                              <div class="form-group">
+                                 <button class="btn btn-block btn-primary" ng-click="assignShipments()" ng-disabled="drivers.length === 0">Assign Shipments</button>
+                              </div>
+                           </div> -->
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <table class="table table-bordered table-striped">
+                                 <thead>
+                                    <tr>
+                                       <!-- <th style="width: 5%"><input type="checkbox" ng-model="model.allItemsSelected" ng-change="selectAll()"></th> -->
+                                       <!-- <th style="width: 10%">Delivery ID</th> -->
+                                       <!-- <th style="width: 20%">
+                                          <div>Order ID</div>
+                                          <div class="blue-text">Order Number</div>
+                                       </th> -->
+                                       <th style="width: 10%">
+                                          <div>DC</div>
+                                       </th>
+                                       <th style="width: 25%">Store</th>
+                                       <!--th style="width: 10%">
+                                          <div>Slot</div>
+                                       </th -->
+                                       <!-- <th style="width: 20%">
+                                          <div class="blue-text">Delivery Date Time</div>
+                                       </th> -->
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr ng-repeat="job in jobs">
+                                       <!-- <td style="width: 5%"><input type="checkbox" type="checkbox" value="{{job.shipment.shipmentId}}" ng-checked="selectedShipments.indexOf(job.shipment.shipmentId) > -1" ng-click="toggleSelection(job)"/></td> -->
+                                       <!-- <td style="width: 10%">{{job.shipment.shipmentId}}</td> -->
+                                       <!-- <td style="width: 20%">
+                                          <div>{{job.shipment.orderId}}</div>
+                                          <div class="blue-text">{{job.shipment.orderNumber}}</div>
+                                       </td> -->
+                                       <td style="width: 10%">{{job.shipment.tja.route}}</td>
+                                       <td style="width: 25%">{{job.shipment.dest[0].address}}</td>
+                                       <!--td style="width: 10%">
+                                          <div style="font-size: 18px;font-weight: bold;">{{job.shipment.slot.startTime}}</div>
+                                       </td -->
+                                       <!-- <td style="width: 20%">
+                                          <div class="blue-text">{{job.shipment.deliveryDate}}</div>
+                                       </td> -->
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

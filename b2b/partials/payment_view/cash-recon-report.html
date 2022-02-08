@@ -1,0 +1,85 @@
+<div class="container" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" style="height: 500px">
+                     <div class="x_title">
+                        <h3>Cash Reconciliation</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <!--div class="col-md-2">
+                              <label> Date</label>
+                              <div class="form-group">
+                                  <input type="date" class="form-control" ng-model="date.fromDate" ng-change="onDateChange()"/>
+                              </div>
+                           </div -->
+                           <div class="col-md-2">
+                              <label>DA</label>
+                              <div class="form-group">
+                                  <span> {{da}}</span>
+                              </div>
+                           </div>
+                        </div>
+                       
+                        <div class="row" id="responsive-table">
+                           <table class="table table-striped table-bordered">
+                              <thead>
+                                 <th>Invoice No</th>
+                                 <th>Mode of Pay</th>
+                                 <th>Shipment Cost</th>
+                                 <th>Amount Collected</th>
+                                 <th>DIFF</th>
+                                 <th>Comment/Approved By</th>
+                                 <th>Credit To</th>
+                              </thead>
+                              <tbody ng-repeat="iir in iirs">
+                                 <td>{{iir.orderId}}</td>
+                                 <td>{{iir.paymentMode}}</td>
+                                 <td>{{formatAmount(iir.shipmentCost)}}</td>
+                                 <td>{{formatAmount(iir.amountCollected)}}</td>
+                                 <td>{{formatAmount(iir.diff)}}</td>
+                                 <td>{{iir.comments}}</td>
+                                 <td>
+                                    {{iir.approved}}  &nbsp;<i class="fa fa-pencil-square-o" ng-click="openDialog(iir)"></i>
+                                 </td>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="creditNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="base-modal-label">Credit To</h4>
+         </div>
+         <div id="pwd-modal-body">
+            <div class="row" style="padding:10px;">
+               <div class="col-md-12">
+                  <label>Please enter your notes</label>
+                  <div class="form-group">
+                     <input class="form-control" type="text" ng-model="app.pwd"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer" id="pwd-modal-footer">
+            <button type="button" class="btn btn-info" ng-click="saveComment()">Save</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

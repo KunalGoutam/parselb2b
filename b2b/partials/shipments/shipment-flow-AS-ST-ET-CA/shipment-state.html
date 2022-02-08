@@ -1,0 +1,78 @@
+<div id="shipments">
+   <div class="box-header">
+      <span class="all-header">Shipments</span>
+   </div>
+   <div class="box-body">
+      <div class="row">
+         <div class="col-md-4 pull-right">
+            <div class="form-group">
+               <label>Select Date</label>
+               <input type="date" class="form-control" ng-model="date.fromDate" ng-change="filtersChange(shipmentState)"/>
+            </div>
+         </div>
+          <div class="col-md-4 pull-right" ng-if="hubs.length > 1">
+            <div class="form-group">
+               <label>Select Hub</label>
+               <ui-select ng-model="selectedHub.hub" theme="selectize" ng-disabled="disabled" ng-change="filtersChange(shipmentState)">
+                  <ui-select-match placeholder="Select or search hub">{{$select.selected.firstName}} {{$select.selected.lastName}}</ui-select-match>
+                  <ui-select-choices repeat="hub in hubs | filter: $select.search">
+                     <span ng-bind-html="hub.firstName | highlight: $select.search"></span>
+                     <span ng-bind-html="hub.lastName | highlight: $select.search"></span>
+                  </ui-select-choices>
+               </ui-select>
+            </div>
+         </div>
+      </div>
+      <div class="nav-tabs-custom">
+         <ul class="nav nav-tabs pull-right">
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.CANCELED_SHIPMENTS)" class="tab-cursor"><b>Canceled</b></a></li>
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.EXPIRED_SHIPMENTS)" class="tab-cursor"><b>Expired</b></a></li>
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.TURNEDAWAY_SHIPMENTS)" class="tab-cursor"><b>Turn Away</b></a></li>
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.COMPLETED_SHIPMENTS)" class="tab-cursor"><b>Completed</b></a></li>
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.ONGOING_SHIPMENTS)" class="tab-cursor"><b>On Going</b></a></li>
+            <li><a data-toggle="tab" ng-click="filtersChange(CONSTANT.PENDING_SHIPMENTS)" class="tab-cursor"><b>Pending</b></a></li>
+            <li class="active"><a data-toggle="tab" ng-click="filtersChange(CONSTANT.UNASSIGNED_SHIPMENTS)" class="tab-cursor"><b>UnAssigned</b></a></li>
+         </ul>
+         <div class="tab-content">
+            <div class="tab-pane active">
+               <div class="box-body">
+               <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/canceled-state.html'" ng-if="isCanceledView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/unassigned-state.html'" ng-if="isUnassignedView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/pending-state.html'" ng-if="isPendingView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/ongoing-state.html'" ng-if="isOnGoingView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/completed-state.html'" ng-if="isCompletedView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/turnaway-state.html'" ng-if="isTrunedAwayView"></div>
+                  <div ng-include="'partials/shipment-flow-AS-ST-ET-CA/expired-state.html'" ng-if="isExpiredView"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="driverLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <span>
+                     <img src="img/favicon.png" class="dialog-img-header">
+                     <h4 class="modal-title blue-text dialog-header-text" id="myModalLabel">Driver Location</h4>
+                  </span>
+               </div>
+               <div class="modal-body">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div id="map" style="height:450px;"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

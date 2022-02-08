@@ -1,0 +1,52 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments" st-pipe="viewExpiredShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+            </th>
+            <th>
+               <div >Driver Name</div>
+               <div >Driver Phone</div>
+            </th>
+            <th>
+               <div >Customer Name</div>
+               <div >Customer Phone</div>
+            </th>
+            <th >Signature</th>
+            <th >Location</th>
+         </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div>{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+            </td>
+            <td>
+               <div>{{job.driver.firstName}} {{job.driver.lastName}}</div>
+               <div >{{job.driver.phone}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <td><a ng-click="viewSignature(job)">View Signature</a></td>
+            <td>
+                <i class="ff tab-cursor" ng-click="trackDriverStatus(job)"><img title="Location" src="assets/images/marker.png"></i> 
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>
+<div ng-include="'partials/shipments/load-details.html'" ng-if="groceries.length > 0"></div>

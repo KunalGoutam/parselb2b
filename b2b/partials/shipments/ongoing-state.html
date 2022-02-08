@@ -1,0 +1,84 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments" st-pipe="viewOngoingShipments">
+      <thead>
+          <tr class="hidden-in-sm">
+            <th>
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+               <!--div >Group Id</div -->
+            </th>
+            <th>
+               <div >Driver Name/Phone</div>
+               <!--div >Driver Phone</div -->
+            </th>
+            <th>
+               <div >Customer Name/Phone</div>
+               <!--div >Customer Phone</div -->
+            </th>
+            <!--th>
+                <div >Slot</div>
+            </th-->
+            <th>
+                <div >Delivery Date Time</div>
+            </th>
+            <th>
+               <div >Start Trip Time</div>
+            </th>
+            <!--th>
+               <div >ETA</div>
+            </th-->
+            <th>
+                <div >Created Time</div>
+            </th>
+            <th >Load Details/Location</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div>{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+               <!--div>{{job.shipment.grpId}}</div -->
+            </td>
+            <td>
+               <div>{{job.driver.firstName}} {{job.driver.lastName}}</div>
+               <div >{{job.driver.phone}}</div>
+                <div><i class="ff tab-cursor" ng-click="trackDriverLocation(job)"><img title="Location" src="assets/images/location.png"></i></div>
+            </td>
+            <td>
+               <div>{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <!--td style="font-size: 18px;font-weight: bold;">
+                <div>{{job.shipment.slot.startTime}}</div>
+            </td-->
+            <td>
+                <div>{{formatDatee(job.shipment.deliveryDate)}}</div>
+            </td>
+            <!--td>
+                <div>{{job.shipment.wfDetails.eta}}</div> <br>
+            </td-->
+             <td>
+               <div>{{job.shipment.wfDetails.wfValues.START_TRIP_TIME}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.createdDateStr}}</div>
+            </td>
+            <td>
+                <i class="ff tab-cursor" ng-click="setShipId(job)"><img title="Load Details" src="assets/images/view_details.png"></i>
+                 &nbsp;<i class="ff tab-cursor" ng-click="trackDriverStatus(job)"><img title="Location" src="assets/images/location.png"></i> 
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>
+<div ng-include="'partials/shipments/load-details.html'" ng-if="groceries.length > 0"></div>

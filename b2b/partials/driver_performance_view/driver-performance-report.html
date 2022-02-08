@@ -1,0 +1,43 @@
+<div class="container body">
+<div class="main_container">
+   <div class="right_col" role="main">
+      <div class="">
+         <div class="clearfix"></div>
+         <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="x_panel">
+                  <div class="x_title">
+                     <h3>DE Performance Reports</h3>
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     <div class="row">
+                        <div class="col-md-3">
+                           <label>Select Date</label>
+                              <div class="form-group">
+                                 <input type="date" class="form-control" ng-model="date.fromDate"/>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="getReports()">GET REPORTS</button>
+                           </div>
+                        </div>
+                     </div>
+                     <!--div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                           <div id="quantum-reports" style="width:100%; height:300px;"></div>
+                        </div>
+                        <div class="col-md-1"></div>
+                     </div-->
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

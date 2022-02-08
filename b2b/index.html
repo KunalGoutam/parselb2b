@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Parsel B2B</title>
+      <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+      <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+      <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+      <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+      <link href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+      <link href="assets/css/select2.css" rel="stylesheet">
+      <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+      <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+      <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+      <link href="assets/css/styles.css" rel="stylesheet">
+      <link href="assets/css/ui-grid.css" rel="stylesheet">
+      <link rel="icon" href="assets/images/favicon.png">
+   </head>
+   <body ng-app="myApp" class="nav-md">
+      <div ui-view></div>
+      <script src="vendors/jquery/dist/jquery.min.js"></script>
+      
+      <script src="vendors/nprogress/nprogress.js"></script>
+      <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+      <!-- jQuery Sparklines -->
+      <script src="vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+      <!-- morris.js -->
+      <script src="vendors/raphael/raphael.min.js"></script>
+      <script src="vendors/morris.js/morris.min.js"></script>
+      <!-- gauge.js -->
+      <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+      <!-- ECharts -->
+      <script src="vendors/echarts/dist/echarts.min.js"></script>
+      <!-- bootstrap-progressbar -->
+      <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+      <!-- Skycons -->
+      <script src="vendors/skycons/skycons.js"></script>
+      <!-- Flot -->
+      <script src="vendors/Flot/jquery.flot.js"></script>
+      <script src="vendors/Flot/jquery.flot.pie.js"></script>
+      <script src="vendors/Flot/jquery.flot.time.js"></script>
+      <script src="vendors/Flot/jquery.flot.stack.js"></script>
+      <script src="vendors/Flot/jquery.flot.resize.js"></script>
+      <!-- Flot plugins -->
+      <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+      <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+      <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+      <!-- DateJS -->
+      <script src="vendors/DateJS/build/date.js"></script>
+      <!-- bootstrap-daterangepicker -->
+      <script src="vendors/moment/min/moment.min.js"></script>
+      <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <!-- bootstrap-datetimepicker -->    
+      <script src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+      <script src="vendors/pnotify/dist/pnotify.js"></script>
+      <script src="vendors/pnotify/dist/pnotify.buttons.js"></script>
+      <script src="vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+      <script src="vendors/angular/angular.min.js" type="text/javascript"></script>
+      <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+      <script src="vendors/angular/angular-sanitize.min.js" type="text/javascript"></script>
+      <script src="vendors/angular/ui.router.js" type="text/javascript"></script>
+      <script src="vendors/angular/ng-websocket.js" type="text/javascript"></script>
+      <script src="vendors/select2/select2-3.4.js"></script>
+      <script src="vendors/angular/smart-table.js"></script>
+      <script src="vendors/crypto-js/crypto.js" type="text/javascript"></script>
+      <script src="vendors/crypto-js/crypto-comp.js" type="text/javascript"></script>
+      <script src="vendors/menu/modernizr.js"></script>
+      <script src="vendors/angular/angularjs-dropdown-multiselect.min" type="text/javascript"></script>
+      <script src="vendors/angular/lodash.min.js" type="text/javascript"></script>
+      
+      <script src="js/app.js"></script>
+      <script src="js/controllers/base-controller/base-controller.js?v=1"></script>
+      <script src="js/controllers/base-controller/dashboard-controller.js?v=1"></script>
+      <script src="js/controllers/login_controller/LoginController.js?v=1"></script>
+      
+      <script src="js/controllers/shipments_controller/Pbb7ShipmentsController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/PendingShipmentsController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/AssignShipmentSlotController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/Pbb7AssignShipmentController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/Pbb7ReAssignShipmentController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/OneTouchShipmentsController.js?v=1"></script>
+      <script src="js/controllers/inventory/Inventory.js?v=1"></script>
+      <script src="js/controllers/inventory/OldReturnController.js?v=1"></script>
+      <script src="js/controllers/inventory/CreditNoteController.js?v=1"></script>
+      <script src="js/controllers/payment-controller/CashReconController.js?v=1"></script>
+      <script src="js/controllers/payment-controller/CashReconReportController.js?v=1"></script>
+      <script src="js/controllers/shipments_controller/Pbb2ShipmentsController.js?v=1"></script>
+      <script src="js/controllers/reports-controller/sku-reports-controller.js?v=1"></script>
+      <script src="js/controllers/reports-controller/return-sku-reports-controller.js?v=1"></script>
+      <script src="js/controllers/driver-performance-controller/DriverPerformanceReportController.js?v=1"></script>
+      <script src="js/controllers/driver-performance-controller/DriverDistanceController.js?v=1"></script>
+      <script src="js/controllers/usermanagement/drivers-controller.js?v=1"></script>
+      <script src="js/controllers/usermanagement/managers-controller.js?v=1"></script>
+      <script src="js/controllers/driver-performance-controller/DriverArrivalController.js?v=1"></script>
+
+
+
+      <script src="js/directives/stColRatioDirective.js?v=1"></script>
+      <script src="js/directives/shipment_directive.js?v=1"></script>
+      <script src="js/constants/constants.js?v=1"></script>
+      <script src="js/filters/shipment-filter.js?v=1"></script>
+      <script src="js/filters/multi-select-filter.js?v=1"></script>
+      <script src="js/services/ValidationService.js?v=1"></script>
+      <script src="js/services/HelperService.js?v=1"></script>
+      <script src="js/services/SocketService.js?v=1"></script>
+      <script src="js/services/BaseServices.js?v=1"></script>
+      <script src="js/services/services.js?v=1"></script>
+      <script src="js/services/AlertService.js?v=1"></script>
+      <script src="js/services/ShipmentSegmentFilterService.js?v=1"></script>
+      <script src="js/utils/util.js?v=1" type="text/javascript"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC5JiYDRYVVNyWAhy6KKE2F_zjmjWkyzmo"></script>
+
+   </body>
+</html>

@@ -1,0 +1,90 @@
+<div class="x_title">
+   <h3>LOAD DETAILS</h3>
+   <div class="clearfix"></div>
+</div>
+<div class="x_content">
+   <div class="col-md-12"><button class="btn btn-primary pull-right" ng-click="getLoads()">Refresh</button></div>
+   <div class="row">
+      <div class="col-md-12">
+         <div class="row">
+            <div class="col-md-6 form-group">
+               <label>Delivery ID: &nbsp;</label>
+               <span>{{selectedShipmentId}}</span>
+            </div>
+            <div class="col-md-12 form-group">
+               <label>Drop Point: </label> <br> {{dropAddress}}
+            </div>
+            <div class="col-md-6 form-group">
+               <label>Recipient Name: &nbsp;</label>
+               <span>{{recipientName}}</span>
+            </div>
+            <div class="col-md-6 form-group">
+               <label>Recipient Phone: &nbsp;</label>
+               <span>{{recipientPhone}}</span>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="col-md-12 form-group" ng-repeat="grocery in groceries">
+               <div ng-if ="shipmentState != CONSTANT.UNASSIGNED_SHIPMENTS">
+                  <label>Store Name: &nbsp;</label> <span >{{grocery.name}} </span><br> 
+                  <label>Pickup Point: &nbsp;</label> <span >{{grocery.address}}</span> 
+               </div>
+               <table class="table table-bordered table-striped header-fixed">
+                  <thead>
+                     <tr>
+                        <th>
+                           Item
+                        </th>
+                        <th>
+                           <div >Total Items</div>
+                        </th>
+                        <th>Picked Quantity</th>
+                        <th>Dispatched Quantity</th>
+                        <th>Canceled Quantity</th>
+                        <th>Return Quantity</th>
+                        <th>Due Quantity</th>
+                        <th>Excess Quantity</th>
+                        <th>
+                           Picked/Dispatched
+                        </th>
+                        <th>
+                           <div >Total Price</div>
+                           <div >Per Item Price</div>
+                        </th>
+                        <th ng-if="shipmentState == CONSTANT.PENDING_SHIPMENTS || shipmentState == CONSTANT.UNASSIGNED_SHIPMENTS">Cancel/Undo Cancel</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr ng-repeat="load in grocery.loads">
+                        <td>
+                           <div>{{load.name}}</div>
+                        </td>
+                        <td>
+                           <div>{{load.quantity}}</div>
+                        </td>
+                        <td>{{load.pickedQuantity}}</td>
+                        <td>{{load.dispatchedQuantity}}</td>
+                        <td>{{load.cancelQuantity}}</td>
+                        <td>{{load.returnQuantity}}</td>
+                        <td>{{load.dueQuantity}}</td>
+                        <td>{{load.excessQuantity}}</td>
+                        <td>
+                           <div ng-if="load.pickUpTime != null && load.dispatchTime == null">Driver has collected items from pickup</div>
+                           <div ng-if="load.pickUpTime == null">Items not collected yet</div>
+                           <div ng-if="load.dispatchTime != null">Items dispatched to customer</div>
+                        </td>
+                        <td>
+                           <div>{{load.total}}</div>
+                           <div>{{load.unitCodPrice}}</div>
+                        </td>
+                        <td ng-if="shipmentState == CONSTANT.PENDING_SHIPMENTS || shipmentState == CONSTANT.UNASSIGNED_SHIPMENTS">
+                           <i ng-if="load.cancelQuantity == 0" class="ff tab-cursor" ng-click="cancelItem(load)"><img title="Cancel Item" src="assets/images/delete_2.png"></i> &nbsp;<i ng-if="load.cancelQuantity > 0" class="ff tab-cursor" ng-click="undoItem(load)"><img title="Undo" src="assets/images/undo_icon.png"></i>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

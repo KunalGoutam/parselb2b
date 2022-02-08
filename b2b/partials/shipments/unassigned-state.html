@@ -1,0 +1,59 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments" st-pipe="viewUnassignedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th style="width: 10%">
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+            </th>
+            <th style="width: 30%">
+               <div >Customer Name/Phone</div>
+            </th>
+            <th style="width: 10%">
+               <div >Created Time</div>
+            </th>
+            <!--th style="width: 10%">
+               <div >Slot</div>
+            </th -->
+            <th style="width: 10%">
+               <div >Delivery Date Time</div>
+            </th>
+            <th style="width: 20%">Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td style="width: 10%">
+               <div>{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+            </td>
+            <td style="width: 30%">
+               <div>{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <td style="width: 10%">
+               <div>{{job.shipment.createdDateStr}}</div>
+            </td>
+            <!--td style="width: 10%;font-size: 18px;font-weight: bold;">
+               <div>{{job.shipment.slot.startTime}}</div>
+            </td -->
+            <td style="width: 10%">
+               <div>{{job.shipment.deliveryDate}}</div>
+            </td>
+            <td style="width: 20%">
+               <i class="ff tab-cursor" ng-click="deleteShipment(job.shipment)"><img title="Delete" src="assets/images/delete_2.png"></i> &nbsp; <i class="ff tab-cursor" ng-click="openSlotModal(job.shipment)"><img title="Change Slot" src="assets/images/change_slot.png"></i> &nbsp; <i class="ff tab-cursor" ng-click="setShipId(job)"><img title="Load Details" src="assets/images/view_details.png"></i> 
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>
+<div ng-include="'partials/shipments/load-details.html'" ng-if="groceries.length > 0"></div>

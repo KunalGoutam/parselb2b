@@ -1,0 +1,57 @@
+<div class="container body" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" style="height: 500px">
+                     <div class="x_title">
+                        <h3>Old Return</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label>Select Date</label>
+                              <div class="form-group">
+                                 <input type="date" class="form-control" ng-model="date.fromDate" ng-change="onDateChange()"/>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="getOldReturnReport()">VIEW</button>
+                           </div>
+                        </div>
+                        </div>
+                        <div class="row" id="responsive-table">
+                           <table class="table table-striped table-bordered">
+                              <thead>
+                                 <th>Driver Name</th>
+                                 <th>Customer Name</th>
+                                 <th>SKU</th>
+                                 <th>Quantity</th>
+                                 <th>Time</th>
+                              </thead>
+                              <tbody ng-repeat="ddt in ddts">
+                                 <td>
+                                    <span>{{ddt.driverName}}</span>
+                                 </td>
+                                 <td>{{ddt.customerName}}</td>
+                                 <td>{{ddt.skuName}}</td>
+                                 <td>{{ddt.quantity}}</td>
+                                <td>{{ddt.time}}</td>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="js/utils/custom.js"></script>

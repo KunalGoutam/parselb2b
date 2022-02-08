@@ -1,0 +1,88 @@
+<div class="container body">
+<div class="main_container">
+   <div class="right_col" role="main">
+      <div class="">
+         <div class="clearfix"></div>
+         <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="x_panel">
+                  <div class="x_title">
+                     <h3>SKU Reports</h3>
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     <div class="row">
+                        <div class="col-md-3">
+                           <label>Select Date</label>
+                              <div class="form-group">
+                                 <input type="date" class="form-control" ng-model="date.fromDate"/>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="getReports()">GET REPORTS</button>
+                           </div>
+                        </div>
+                        <div class="col-md-3">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="viewReports()">VIEW REPORTS</button>
+                           </div>
+                        </div>
+                     </div>
+                     <!--div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                           <div id="quantum-reports" style="width:100%; height:300px;"></div>
+                        </div>
+                        <div class="col-md-1"></div>
+                     </div-->
+
+                     <div class="row" id="responsive-table">
+                           <table class="table table-striped table-bordered">
+                              <thead>
+                                 <th>Delivery ID</th>
+                                 <th>Invoice No</th>
+                                 <th>Document</th>
+                                 <th>Buyer Name</th>
+                                 <th>Delivery Address</th>
+                                 <th>Prod Code</th>
+                                 <th>Prod Name</th>
+                                 <th>Total Qty</th>
+                                 <th>Return Qty</th>
+                                 <th>Reason For Return</th>
+                                 <th>Due Qty</th>
+                                 <th>Excess Qty</th>
+                                 <th>DA</th>
+                                 <th>Vehicle</th>
+                                 <th>Timestamp</th>
+                              </thead>
+                              <tbody ng-repeat="report in reports">
+                                 <td>{{report.shipmentId}}</td>
+                                 <td>{{report.invoiceNo}}</td>
+                                 <td>{{report.document}}</td>
+                                 <td>{{report.buyerName}}</td>
+                                 <td>{{report.deliveryAddress}}</td>
+                                 <td>{{report.prodCode}}</td>
+                                  <td>{{report.prodName}}</td>
+                                  <td>{{report.totalQty}}</td>
+                                  <td>{{report.returnQty}}</td>
+                                  <td>{{report.returnReason}}</td>
+                                  <td>{{report.dueQty}}</td>
+                                  <td>{{report.excessQty}}</td>
+                                  <td>{{report.driverName}}</td>
+                                  <td>{{report.vehicle}}</td>
+                                  <td>{{report.dtt}}</td>
+                              </tbody>
+                           </table>
+                        </div>
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

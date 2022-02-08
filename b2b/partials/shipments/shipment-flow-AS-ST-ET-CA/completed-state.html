@@ -1,0 +1,102 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments" st-pipe="viewCompletedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+            </th>
+            <th>
+               <div >Driver Name</div>
+               <div >Driver Phone</div>
+            </th>
+            <th>
+               <div >Customer Name</div>
+               <div >Customer Phone</div>
+            </th>
+            <th>
+               <div >Recipient Name</div>
+               <div >Recipient Phone</div>
+            </th>
+            <th>
+               <div >Pickup Point</div>
+               <div >Drop Point</div>
+            </th>
+            <th>
+               <div >COD</div>
+               <div >Amount Paid</div>
+            </th>
+            <th>
+               <div >Created Time</div>
+               <div >Start Time</div>
+               <div >Completed Time</div>
+            </th>
+            <th >Distance Traveled</th>
+            <th >View Location</th>
+            <th >Signature</th>
+         </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div>{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+            </td>
+            <td>
+               <div>{{job.driver.firstName}} {{job.driver.lastName}}</div>
+               <div >{{job.driver.phone}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.address[0].name}}</div>
+               <div >{{job.shipment.address[0].phone}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.address[0].address}}</div>
+               <div ><b>Google Address:</b><br>{{job.shipment.dest[0].gaddress}}<br><b>Exact Address:</b><br>{{job.shipment.dest[0].address}}<br><b>Actual Drop:</b><br>{{job.shipment.actualDest[0].address}}</div>
+            </td>
+            <td>
+               {{job.shipment.cod}}
+               <div >{{job.shipment.wfDetails.wfValues.AMOUNT_COLLECTED}}</div>
+            </td>
+            <td>
+               <div>{{job.shipment.createdDateStr}}</div>
+               <div >{{job.shipment.wfDetails.wfValues.START_TRIP_TIME}}</div>
+               <div style="color: #20638f">{{job.shipment.wfDetails.wfValues.COMPLETED_TIME}}</div>
+            </td>
+            <td>{{job.shipment.wfDetails.wfValues.DISTANCE_TRAVELLED_IN_KMS}} Kms</td>
+            <td><button class="btn btn-block blue-background" ng-click="trackDriverStatus(job)">Location</button></td>
+            <td><a ng-click="viewSignature(job)">View Signature</a></td>
+         </tr>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-md hidden-lg">
+            <td data-title="Delivery ID">{{job.shipment.shipmentId}}</td>
+            <td data-title="Order ID">{{job.shipment.orderId}}</td>
+            <td data-title="Driver Name">{{job.driver.firstName}} {{job.driver.lastName}}</td>
+            <td data-title="Driver Phone">{{job.driver.phone}}</td>
+            <td data-title="Customer Name">{{job.shipment.dest[0].name}}</td>
+            <td data-title="Customer Phone">{{job.shipment.dest[0].phone}}</td>
+            <td data-title="Pickup Address">{{job.shipment.address[0].address}}</td>
+            <td data-title="Drop Address"><b>Google Address:</b><br>{{job.shipment.dest[0].gaddress}}<br><b>Exact Address:</b><br>{{job.shipment.dest[0].address}}<br><b>Actual Drop:</b><br>{{job.shipment.actualDest[0].address}}</td>
+            <td data-title="Created Date">{{job.shipment.createdDateStr}}</td>
+            <td data-title="COD">{{job.shipment.cod}}</td>
+            <td data-title="Amount Collected">{{job.shipment.wfDetails.wfValues.AMOUNT_COLLECTED}}</td>
+            <td data-title="Start Trip Time">{{job.shipment.wfDetails.wfValues.START_TRIP_TIME}}</td>
+            <td data-title="Completed Time">{{job.shipment.wfDetails.wfValues.COMPLETED_TIME}}</td>
+            <td data-title="Distance Traveled">{{job.shipment.wfDetails.wfValues.DISTANCE_TRAVELLED_IN_KMS}} kms</td>
+            <td data-title="View Location"><button class="btn btn-block blue-background" ng-click="trackDriverStatus(job)">Location</button></td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="10" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>

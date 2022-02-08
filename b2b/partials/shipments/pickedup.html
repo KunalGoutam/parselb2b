@@ -1,0 +1,56 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped" st-table="shipments" st-pipe="viewPickedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div>Delivery ID</div>
+            </th>
+            <th>
+               <div>Driver Name</div>
+               <div class="blue-text">Driver ID</div>
+            </th>
+            <th>
+               <div>SKU</div>
+               <div class="blue-text">Picked Quantity</div>
+            </th>
+            <th>
+               <div>Picked From Distributor</div>
+               <div class="blue-text">Store Name</div>
+            </th>
+            <th>
+               <div class="blue-text">TimeStamp</div>
+            </th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div>{{job.shipmentId}}</div>
+            </td>
+            <td>
+               <div>{{job.driverFirstName}} {{job.driverLastName}}</div>
+               <div class="blue-text">{{job.driverId}}</div>
+            </td>
+            <td>
+               <div>{{job.sku}}</div>
+               <div class="blue-text">{{job.pickedQty}}</div>
+            </td>
+            <td>
+               <div>{{job.pickedStoreName}}</div>
+               <div class="blue-text">{{job.pickedStoreName}}</div>
+            </td>
+            <td>
+               <!--div>{{}}</div-->
+               <div class="blue-text">{{job.ts}}</div>
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>

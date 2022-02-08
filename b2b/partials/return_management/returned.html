@@ -1,0 +1,142 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped" st-table="shipments" st-pipe="viewReturnedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div>Invoice</div>
+            </th>
+            <th>
+               <div>Driver Name</div>
+               <div class="blue-text">Vehicle No.</div>
+            </th>
+            <th>
+               <div>SKU</div>
+               <div class="blue-text">Picked Quantity</div>
+            </th>
+            <th>
+               <div>Returned Quantity</div>
+            </th>
+            <!-- <th>
+               <div>Picked From Distributor</div>
+               <div class="blue-text">Store Name</div>
+            </th> -->
+            <!-- <th>
+               <div>Returned To Distributor</div>
+               <div class="blue-text">Store Name</div>
+            </th> -->
+            <!-- <th>
+               <div>Delivery Status</div>
+               <div class="blue-text">TimeStamp</div>
+            </th> -->
+            <!-- <th>
+               <div>Reason for Return</div>
+            </th> -->
+         </tr>
+      </thead>
+      <tbody>
+         <tr class="hidden-xs hidden-sm">
+            <td>
+               <div>69313</div>
+            </td>
+            <td>
+               <div>Deepesh Movar</div>
+               <div class="blue-text">MH 02 BE 2577</div>
+            </td>
+            <td>
+               <div>PILLSBURY PREMIUM EGG FREE SPONGE MIX VANILLA 5KG</div>
+               <div class="blue-text">0</div>
+            </td>
+            <td class="edit-td">
+               <!--input type = "text" ng-model="job.returnQty" class="edit-input"/-->
+               <div>2</div>
+            </td>
+            <!-- <td>
+               <div>{{job.pickedStoreName}}</div>
+               <div class="blue-text">{{job.pickedStoreName}}</div>
+            </td> -->
+            <!-- <td class="edit-td">
+               <div>{{job.returnStoreName}}</div> -->
+               <!--input type = "text" ng-model="job.returnSapCode" class="edit-input"/-->
+               <!-- <div class="blue-text">{{job.returnStoreName}}</div>
+            </td> -->
+            <!-- <td>
+               <div>{{job.deliveryStatus}}</div>
+               <div class="blue-text">{{job.ts}}</div>
+            </td> -->
+            <!-- <td>
+               <div>{{job.reason}}</div>
+            </td> -->
+             <td>
+               <div><a href="#">Approve</a> | <a href="#">Reject</a></div>      
+            </td>  
+         </tr>
+         <tr class="hidden-xs hidden-sm">
+            <td>
+               <div>69227</div>
+            </td>
+            <td>
+               <div>kamalkant</div>
+               <div class="blue-text">MH 02 BE 4577</div>
+            </td>
+            <td>
+               <div>VAN LEER-DARK COMPOUND CONFECTION</div>
+               <div class="blue-text">200</div>
+            </td>
+            <td class="edit-td">
+               <!--input type = "text" ng-model="job.returnQty" class="edit-input"/-->
+               <div>10</div>
+            </td>  
+            <td>
+               <div><a href="#">Approve</a> | <a href="#">Reject</a></div>      
+            </td>                
+         </tr>
+         <tr class="hidden-xs hidden-sm">
+            <td>
+               <div>69183</div>
+            </td>
+            <td>
+               <div>Zamil</div>
+               <div class="blue-text">MH 02 BE 4277</div>
+            </td>
+            <td>
+               <div>GOELD WHOLE WHEAT LACCHA PARATHA</div>
+               <div class="blue-text">0</div>
+            </td>
+            <td class="edit-td">
+               <!--input type = "text" ng-model="job.returnQty" class="edit-input"/-->
+               <div>20</div>
+            </td>  
+            <td>
+               <div><a href="#">Approve</a> | <a href="#">Reject</a></div>      
+            </td>                
+         </tr>
+         <tr class="hidden-xs hidden-sm">
+            <td>
+               <div>69298</div>
+            </td>
+            <td>
+               <div>Shivbaran</div>
+               <div class="blue-text">MH 02 BE 4537</div>
+            </td>
+            <td>
+               <div>LONDON DAIRY-YOGHURT BERRY LIGHT</div>
+               <div class="blue-text">500 </div>
+            </td>
+            <td class="edit-td">
+               <!--input type = "text" ng-model="job.returnQty" class="edit-input"/-->
+               <div>35</div>
+            </td>
+             <td>
+               <div><a href="#">Approve</a> | <a href="#">Reject</a></div>      
+            </td>            
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="15" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>

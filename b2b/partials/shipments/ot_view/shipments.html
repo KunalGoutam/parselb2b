@@ -1,0 +1,277 @@
+<div class="container body" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                     <div class="x_title">
+                        <h3>Shipments</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-3 pull-right">
+                              <label>Select Date</label>
+                              <div class="form-group">
+                                 <div class="form-group">
+                                    <div class='input-group date' id='datePicker'>
+                                       <input type='text' class="form-control"/>
+                                       <span class="input-group-addon">
+                                       <span class="glyphicon glyphicon-calendar"></span>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <ul class="tab-header">
+                                 <li ng-class="{'active_li': tab==7, 'inactive_li': tab!=7}" class="pull-right"><a ng-class="{active : tab==7}"  ng-click="tabSelected(CONSTANT.CANCELED_SHIPMENTS)">CANCELED</a></li>
+                                 <li ng-class="{'active_li': tab==5, 'inactive_li': tab!=5}" class="pull-right"><a ng-class="{active : tab==5}" ng-click="tabSelected(CONSTANT.TURNEDAWAY_SHIPMENTS)">TURNED AWAY</a></li>
+                                 <li ng-class="{'active_li': tab==4, 'inactive_li': tab!=4}" class="pull-right"><a ng-class="{active : tab==4}" ng-click="tabSelected(CONSTANT.COMPLETED_SHIPMENTS)">COMPLETED</a></li>
+                                 <li ng-class="{'active_li': tab==3, 'inactive_li': tab!=3}" class="pull-right"><a ng-class="{active : tab==3}" ng-click="tabSelected(CONSTANT.ONGOING_SHIPMENTS)">ONGOING</a></li>
+                                 <li ng-class="{'active_li': tab==2, 'inactive_li': tab!=2}" class="pull-right"><a ng-class="{active : tab==2}" ng-click="tabSelected(CONSTANT.PENDING_SHIPMENTS)">PENDING</a></li>
+                                 <li ng-class="{'active_li': tab==1, 'inactive_li': tab!=1}" class="pull-right"><a ng-class="{active : tab==1}" ng-click="tabSelected(CONSTANT.UNASSIGNED_SHIPMENTS)">UNASSIGNED</a></li>
+                                 
+                              </ul>
+                           </div>
+                           <div class="col-md-12">
+                              <div ng-if="tab==1">
+                                 <div ng-include="'partials/shipments/ot_view/unassigned-state.html'"></div>
+                              </div>
+                              <div ng-if="tab==2">
+                                 <div ng-include="'partials/shipments/ot_view/pending-state.html'"></div>
+                              </div>
+                              <div ng-if="tab==3">
+                                 <div ng-include="'partials/shipments/ot_view/ongoing-state.html'"></div>
+                              </div>
+                              <div ng-if="tab==4">
+                                 <div ng-include="'partials/shipments/ot_view/completed-state.html'"></div>
+                              </div>
+                              <div ng-if="tab==5">
+                                 <div ng-include="'partials/shipments/ot_view/turnaway-state.html'"></div>
+                              </div>
+                              <div ng-if="tab==7">
+                                 <div ng-include="'partials/shipments/ot_view/canceled-state.html'"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="driverLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span>
+               <img src="assets/images/favicon.png" class="dialog-img-header">
+               <h4 class="modal-title blue-text dialog-header-text" id="myModalLabel">Driver Location</h4>
+            </span>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div id="map" style="height:450px;"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="slotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span>
+               <img src="assets/images/favicon.png" class="dialog-img-header">
+               <h4 class="modal-title blue-text dialog-header-text" id="myModalLabel">Change Slot</h4>
+            </span>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="col-md-12">
+                           <label>Select Date</label>
+                           <div class="form-group">
+                              <input type="date" class="form-control" ng-model="date.slotDate"/>
+                           </div>
+                        </div>
+                        <div class="col-md-12">
+                           <label>Select Slot</label>
+                           <div class="form-group">
+                              <ui-select ng-model="selectedSlot.slot" theme="selectize" ng-disabled="disabled">
+                                 <ui-select-match placeholder="Select or search slot">{{$select.selected.startTime}} &nbsp; - &nbsp; {{$select.selected.stopTime}}</ui-select-match>
+                                 <ui-select-choices repeat="slot in slots | filter: $select.search">
+                                    <span ng-bind-html="slot.startTime | highlight: $select.search"></span> &nbsp; - &nbsp;
+                                    <span ng-bind-html="slot.stopTime | highlight: $select.search"></span>
+                                 </ui-select-choices>
+                              </ui-select>
+                           </div>
+                        </div>
+                        <div class="col-md-12">
+                           <label>Please enter the access code to continue</label>
+                           <div class="form-group">
+                              <input class="form-control" type="password" ng-model="access.pwd"/>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer" id="pwd-modal-footer">
+            <button type="button" class="btn btn-info" ng-click="applySlot()">Apply</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="delShipmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog delete-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Cancel Order</h4>
+         </div>
+         <div class="modal-body" style="text-align: left;">
+            <!--span>Are you sure want to delete this shipment ?<br> <label>{{delShipmentId}}</label></span-->
+            <div class="row">
+               <div class="col-md-6">
+                  <form>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Customer requested to cancel">
+                     Customer requested to cancel
+                     </span><br/>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="CS not reachable">
+                     CS not reachable
+                     </span><br/>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Delay cancelation">
+                     Delay cancelation
+                     </span><br/>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Stock issue">
+                     Stock issue
+                     </span><br/>
+                  </form>
+               </div>
+               <div class="col-md-6">
+                  <form>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Stock issue partial">
+                     Stock issue partial
+                     </span><br/>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Customer is not available at location">
+                     Customer is not available at location
+                     </span><br/>
+                     <span>
+                     <input type="radio" ng-model="cancel.reason" value="Wrong product/bad quality product">
+                     Wrong product/bad quality product
+                     </span><br/>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteMMShipment()">Delete</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="cancelItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog delete-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Cancel Item</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to cancel this item ?<br> <label>{{cancelItemSku}}</label></span>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="cancelMMItem()">Cancel Item</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="undoCancelItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog delete-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Undo Cancel Item</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to undo this canceled item ?<br> <label>{{undoItemSku}}</label></span>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="undoCancelMMItem()">Undo Cancel Item</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="unassignShipmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog delete-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Unassign shipment</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to unassign this shipment <br> <label>{{unassignShipId}}</label> <br> from driver &nbsp;<label>{{unAssignDriver}}</label></span>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="unassignShipmentPendingToUA()">UnAssign</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="continueShipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog continueship-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;IR Shipment</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to move this shipment to ongoing status?</span>
+            <div class="col-md-12">
+               <label>Please enter the access code to continue</label>
+               <div class="form-group">
+                  <input class="form-control" type="password" ng-model="access.pwd"/>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-info" ng-click="continueIRConfirm()">Continue</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

@@ -1,0 +1,76 @@
+<div class="container body" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" style="height: 800px">
+                     <div class="x_title">
+                        <h3>Approve Returns</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Select Date</label>
+                                 <input type="date" class="form-control" ng-model="date.fromDate" ng-change="filtersChange(shipmentState)"/>
+                              </div>
+                           </div>
+                             <div class="col-md-3">
+                           <label>Select DC</label>
+                            <div class="form-group">
+                                             <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled">
+                                                <ui-select-match placeholder="Select or search DE">DC-Palwal</ui-select-match>
+                                                <ui-select-choices repeat="driver in drivers | filter: $select.search">
+                                                   <span ng-bind-html="driver.firstName | highlight: $select.search"></span>
+                                                   <span ng-bind-html="driver.lastName | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select>
+                                          </div>
+                           </div>
+                           <!-- <div class="col-md-3">
+                           <label>Select SKU</label>
+                            <div class="form-group">
+                                             <ui-select ng-model="selectedRoute.sku" theme="selectize" ng-disabled="disabled"  ng-change="onSkuChange()">
+                                                <ui-select-match placeholder="Select or search sku">{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="sku in skus | filter: $select.search">
+                                                   <span ng-bind-html="sku | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select>
+                                          </div>
+                           </div> -->
+
+                           <!-- <div class="col-md-3 pull-right">
+                           <div class="form-group">
+                              <label>&nbsp;</label>
+                              <button class="btn btn-block btn-success" ng-click="getReports()">VIEW REPORTS</button>
+                           </div>
+                        </div> -->
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-12">
+                              <ul class="tab-header">
+                                 <li ng-class="{'active_li': tab==2, 'inactive_li': tab!=2}" class="pull-right"><a ng-class="{active : tab==2}"  ng-click="tabSelected(CONSTANT.RETURNED_SHIPMENTS)">RETURNED</a></li>
+                                 <!-- <li ng-class="{'active_li': tab==1, 'inactive_li': tab!=1}" class="pull-right"><a ng-class="{active : tab==1}"  ng-click="tabSelected(CONSTANT.PICKED_SHIPMENTS)">PICKEDUP</a></li> -->
+                              </ul>
+                           </div>
+                           <div class="col-md-12">
+                              <div ng-if="tab==2">
+                                 <div ng-include="'partials/return_management/returned.html'"></div>
+                              </div>
+                              <!-- <div ng-if="tab==1">
+                                 <div ng-include="'partials/shipments/pickedup.html'"></div>
+                              </div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

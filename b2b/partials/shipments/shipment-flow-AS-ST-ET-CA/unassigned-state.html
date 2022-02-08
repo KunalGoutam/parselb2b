@@ -1,0 +1,93 @@
+<div id="responsive-table">
+   <table class="table table-bordered table-striped header-fixed" st-table="shipments" st-pipe="viewUnassignedShipments">
+      <thead>
+         <tr class="hidden-in-sm">
+            <th>
+               <div >Delivery ID</div>
+               <div >Order Id</div>
+               <div >Order Number</div>
+            </th>
+            <th>
+               <div >Customer Name</div>
+               <div >Customer Phone</div>
+            </th>
+            <th>
+               <div >Recipient Name</div>
+               <div >Recipient Phone</div>
+            </th>
+            <th>
+               <div >Pickup Point</div>
+               <div >Drop Point</div>
+            </th>
+            <th>
+                <div >Created Time</div>
+                <div >Pickup Time</div>
+                <div >Assigned Time</div>
+            </th>
+            <th >ETA</th>
+            <th>
+               <div >COD</div>
+            </th>
+            <th >Delete</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-xs hidden-sm">
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.shipmentId}}</div>
+               <div>{{job.shipment.orderId}}</div>
+               <div >{{job.shipment.orderNumber}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.address[0].name}}</div>
+               <div >{{job.shipment.address[0].phone}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.dest[0].name}}</div>
+               <div >{{job.shipment.dest[0].phone}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.address[0].address}}</div>
+               <div ><b>Google Address:</b><br>{{job.shipment.dest[0].gaddress}}<br><b>Exact Address:</b><br>{{job.shipment.dest[0].address}}<br><b>Actual Drop:</b><br>{{job.shipment.actualDest[0].address}}</div>
+            </td>
+            <td>
+               <div ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.createdDateStr}}</div>
+               <div >{{job.shipment.pickupDate}}</div>
+               <div>{{job.shipment.wfDetails.wfValues.ASSIGNED_TIME}}</div>
+            </td>
+            <td ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">{{job.shipment.wfDetails.eta}}</td>
+            <td ng-style="job.shipment.delieveredStates == null? { color:'red'} : {color:'black'}">
+               {{job.shipment.cod}}
+            </td>
+            <td>
+               <button class="btn btn-block blue-background" ng-click="deleteShipment(job.shipment)">Delete</button>
+            </td>
+         </tr>
+         <tr ng-repeat="job in shipments track by $index" class="hidden-md hidden-lg">
+            <td data-title="Delivery ID">{{job.shipment.shipmentId}}</td>
+            <td data-title="Delivery Status">
+               <div  ng-if="job.shipment.delieveredStates != null"><i class="fa fa-check"></i></div>
+            </td>
+            <td data-title="Driver Name">{{job.driver.firstName}} {{job.driver.lastName}}</td>
+            <td data-title="Driver Phone">{{job.driver.phone}}</td>
+            <td data-title="Customer Name">{{job.shipment.dest[0].name}}</td>
+            <td data-title="Customer Phone">{{job.shipment.dest[0].phone}}</td>
+            <td data-title="Pickup Address">{{job.shipment.address[0].address}}</td>
+            <td data-title="Drop Address"><b>Google Address:</b><br>{{job.shipment.dest[0].gaddress}}<br><b>Exact Address:</b><br>{{job.shipment.dest[0].address}}<br><b>Actual Drop:</b><br>{{job.shipment.actualDest[0].address}}</td>
+            <td data-title="Created Date">{{job.shipment.createdDateStr}}</td>
+            <td data-title="ETA">{{job.shipment.wfDetails.eta}}</td>
+            <td data-title="COD">{{job.shipment.cod}}</td>
+            <td data-title="Delete Shipemnt">
+                <button class="btn btn-block blue-background" ng-click="deleteShipment(job.shipment)">Delete</button>
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td colspan="15" class="center-align">
+               <div st-items-by-page="10" st-pagination="" st-template="partials/base/pagination-template.html"></div>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</div>

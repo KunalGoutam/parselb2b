@@ -1,0 +1,237 @@
+<div class="container body">
+   <div class="main_container">
+      <div class="col-md-3 left_col">
+         <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+               <img id="dsb_img" />
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+               <div class="menu_section">
+                  <ul class="nav side-menu" ng-if="appId != 7">  
+                     <li>
+                        <a><i class="fa fa-motorcycle"></i> Shipments <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                           <li><a ui-sref="b2b.dashboard.shipments" >Shipment Details</a></li>
+                           <li><a ui-sref="b2b.dashboard.jioshipments" ng-if="appId == 3">View Shipments</a></li>
+                           <li><a ui-sref="b2b.dashboard.otshipments" ng-if="appId == 5">View Shipments</a></li>
+                           <li><a ui-sref="b2b.dashboard.viewpendingshipments" ng-if="appId == 5">Unprocess Shipments</a></li>
+                           <li ng-if="appId == 0"><a ui-sref="b2b.dashboard.slotconfiguration">Slot Congfiguration</a></li>
+                           <!--li><a id="assignMenu">Assign Shipments</a></li-->
+                        </ul>
+                     </li>
+                  </ul>
+                  <ul class="nav side-menu" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.shipments">
+                           <i class="fa fa-motorcycle"></i> Delivery
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu" ng-show = "userType == 8" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.return_management">
+                           <i class="fa fa-undo"></i> Return Management
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu" ng-show = "userType == 8" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.approve_route">
+                           <i class="fa fa-check"></i> Approve Adhoc Route
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu"  ng-show = "userType == 8 " ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.escalation">
+                           <i class="fa fa-tachometer"></i> Escalation 
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu"  ng-show = " userType == 9" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.escalationDC">
+                           <i class="fa fa-tachometer"></i> Escalation 
+                        </a>
+                     </li>
+                  </ul>
+
+
+                  <ul class="nav side-menu"  ng-show = "userType == 9" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.adhoc_route">
+                           <i class="fa fa-plus"></i> Create Adhoc route 
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu" ng-show = "userType == 9"  ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.approve_adhoc_drivers">
+                           <i class="fa fa-check"></i> Approve Adhoc DE 
+                        </a>
+                     </li>
+                  </ul>
+
+                  <ul class="nav side-menu" ng-show = "userType == 10" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.confirm_dispatch">
+                           <i class="fa fa-cog"></i> Confirm Dispatch 
+                        </a>
+                     </li>
+                  </ul>
+
+                   <ul class="nav side-menu" ng-hide = "userType == 8 || userType == 9 || userType == 2" ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.drivers">
+                           <i class="fa fa-external-link"></i> Delivery Executive
+                        </a>
+                     </li>
+                  </ul>
+                   <ul class="nav side-menu" ng-hide = "userType == 8 || userType == 9 || userType == 10"  ng-if="appId == 7">
+                     <li>
+                        <a ui-sref="b2b.dashboard.managers">
+                           <i class="fa fa-external-link"></i> Managers
+                        </a>
+                     </li>
+                  </ul>
+                  <ul class="nav side-menu" ng-hide = "userType == 8 || userType == 9 || userType == 2"  ng-show="appId == 7">
+                     <li>
+                        <a><i class="fa fa-motorcycle"></i> Assign Shipments <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                           <li><a ui-sref="b2b.dashboard.assignshipments">Assign Shipments</a></li>
+                           <li><a ui-sref="b2b.dashboard.reassignshipments">Reassign Shipments</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+                  <ul ng-hide = "userType == 8 || userType == 9 || userType == 10 || userType == 2"  class="nav side-menu" ng-show="appId == 7">
+                     <li>
+                        <a><i class="fa fa-external-link"></i> SKU <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                           <li><a ui-sref="b2b.dashboard.inventory">
+                              <i class="fa fa-external-link"></i> SKU
+                           </a>
+                        </li>
+                        <li><a ui-sref="b2b.dashboard.oldreturn">
+                           <i class="fa fa-external-link"></i> OLD RETURN
+                        </a>
+                     </li>
+                     <li><a ui-sref="b2b.dashboard.creditnote">
+                        <i class="fa fa-external-link"></i> CREDIT NOTE
+                     </a>
+                  </li>
+                        </ul>
+                     </li>
+                  </ul>
+               
+                  <ul class="nav side-menu" ng-hide = "userType == 8 || userType == 9 || userType == 10 || userType == 2"  ng-if="appId == 7">
+                     <li>
+                        <a id="cashreconMenu" ng-click="openCashReconMenu()">
+                        <i class="fa fa-line-chart"></i> Payment Details</a>
+                     </li>
+                  </ul>
+                  <ul class="nav side-menu" ng-show="appId == 7">
+                     <li>
+                        <a><i class="fa fa-file"></i> DE <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                           <li><a ui-sref="b2b.dashboard.da-performance">Performance Tracker</a></li>
+                           <li><a ui-sref="b2b.dashboard.da-distance">Distance Tracker</a></li>
+                           <li><a ui-sref="b2b.dashboard.da-arrival">Arrival Tracker</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+                  <ul class="nav side-menu" ng-show="appId == 7">
+                     <li>
+                        <a><i class="fa fa-file"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                           <li><a ui-sref="b2b.dashboard.quantum-reports">SKU Report</a></li>
+                           <li><a ui-sref="b2b.dashboard.sku-reports">Return SKU Report</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div ui-view></div>
+   </div>
+</div>
+<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="base-modal-label">Verification</h4>
+         </div>
+         <div id="pwd-modal-body">
+            <div class="row" style="padding:10px;">
+               <div class="col-md-12">
+                  <label>Please enter password to access this menu</label>
+                  <div class="form-group">
+                     <input class="form-control" type="password" ng-model="app.pwd"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer" id="pwd-modal-footer">
+            <button type="button" class="btn btn-info" id="validateBtn">Validate</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="reconpwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="base-modal-label">Verification</h4>
+         </div>
+         <div id="pwd-modal-body">
+            <div class="row" style="padding:10px;">
+               <div class="col-md-12">
+                  <label>Please enter password to access this menu</label>
+                  <div class="form-group">
+                     <input class="form-control" type="password" ng-model="app.pwd"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer" id="pwd-modal-footer">
+            <button type="button" class="btn btn-info" id="validatereconBtn">Validate</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="CSPwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="base-modal-label">Verification</h4>
+         </div>
+         <div id="pwd-modal-body">
+            <div class="row" style="padding:10px;">
+               <div class="col-md-12">
+                  <label>Please enter password to access this menu</label>
+                  <div class="form-group">
+                     <input class="form-control" type="password" ng-model="app.pwd"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer" id="pwd-modal-footer">
+            <button type="button" class="btn btn-info" ng-click="validateCSInventoryMenu()">Validate</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

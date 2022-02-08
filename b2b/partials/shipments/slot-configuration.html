@@ -1,0 +1,103 @@
+<div class="container body">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                     <div class="x_title">
+                        <h3>SLOT CONFIGURATION</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <label>Select Date</label>
+                              <div class="form-group">
+                                 <input type="date" class="form-control" ng-model="date.slotDate" ng-change="getUnassignedShipments()"/>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <label>Select Slot To Change</label>
+                              <div class="form-group">
+                                 <ui-select ng-model="selectedSlot.slot" theme="selectize" ng-disabled="disabled">
+                                    <ui-select-match placeholder="Select or search slot">{{$select.selected.startTime}} &nbsp; - &nbsp; {{$select.selected.stopTime}}</ui-select-match>
+                                    <ui-select-choices repeat="slot in slots | filter: $select.search">
+                                       <span ng-bind-html="slot.startTime | highlight: $select.search"></span> &nbsp; - &nbsp;
+                                       <span ng-bind-html="slot.stopTime | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                 </ui-select>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <label>&nbsp;</label>
+                              <div class="form-group">
+                                 <button class="btn btn-block btn-primary" ng-click="getUnassignedShipments()">Refresh Shipments</button>
+                              </div>
+                           </div>
+                           <div class="col-md-2">
+                              <label>&nbsp;</label>
+                              <div class="form-group">
+                                 <button class="btn btn-block btn-primary" ng-click="openChangeSlotModal()" ng-disabled="selectedShipments.length === 0">Change Slot</button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <table class="table table-bordered table-striped create-shipment-table" style="height:400px">
+                                 <thead>
+                                    <tr>
+                                       <th style="width: 5%"></th>
+                                       <th style="width: 10%">Delivery ID</th>
+                                       <th style="width: 15%">Order Id</th>
+                                       <th style="width: 20%">Slot</th>
+                                       <th style="width: 20%">Delivery DateTime</th>
+                                       <th style="width: 30%">Drop Point</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr ng-repeat="job in jobs">
+                                       <td style="width: 5%"><input type="checkbox" type="checkbox" value="{{job.shipment.shipmentId}}" ng-checked="selectedShipments.indexOf(job.shipment.shipmentId) > -1" ng-click="toggleSelection(job.shipment.shipmentId)"/></td>
+                                       <td style="width: 10%">{{job.shipment.shipmentId}}</td>
+                                       <td style="width: 15%">{{job.shipment.orderId}}</td>
+                                       <td style="width: 20%">{{job.shipment.slot.startTime}} - {{job.shipment.slot.stopTime}}</td>
+                                       <td style="width: 20%">{{job.shipment.deliveryDate}}</td>
+                                       <td style="width: 30%">{{job.shipment.dest[0].address}}</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="changeSlotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog changeslot-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Confirmation</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to change slot?</span>
+            <div class="col-md-12">
+               <label>Please enter the access code to continue</label>
+               <div class="form-group">
+                  <input class="form-control" type="password" ng-model="access.pwd"/>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-info" ng-click="applySlot()">Change Slot</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>

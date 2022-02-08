@@ -1,0 +1,87 @@
+<div class="container body" id="shipments-page">
+   <div class="main_container">
+      <div class="right_col" role="main">
+         <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" style="height: 500px">
+                     <div class="x_title">
+                        <h3>Credit Note</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label>Select Date</label>
+                              <div class="form-group">
+                                 <input type="date" class="form-control" ng-model="date.fromDate" ng-change="onDateChange()"/>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label>Select Invoice</label>
+                               <div class="form-group">
+                                                <ui-select ng-model="selectedInvoice.invoice" theme="selectize" ng-disabled="disabled"  ng-change="getInvoiceReturnSKUList()">
+                                                   <ui-select-match placeholder="Select or search invoice">{{$select.selected}}</ui-select-match>
+                                                   <ui-select-choices repeat="invoice in invoices | filter: $select.search">
+                                                      <span ng-bind-html="invoice | highlight: $select.search"></span>
+                                                   </ui-select-choices>
+                                                </ui-select>
+                                             </div>
+                              </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label>Select SKU</label>
+                               <div class="form-group">
+                                                <ui-select ng-model="selectedSku.sku" theme="selectize" ng-disabled="disabled"  ng-change="onInvoiceChange()">
+                                                   <ui-select-match placeholder="Select or search sku">{{$select.selected.prodName}}</ui-select-match>
+                                                   <ui-select-choices repeat="sku in skus | filter: $select.search">
+                                                      <span ng-bind-html="sku.prodName | highlight: $select.search"></span>
+                                                   </ui-select-choices>
+                                                </ui-select>
+                                             </div>
+                              </div>
+                             
+                        </div>
+
+                        <div class="row">
+                        
+                              <div class="col-md-3">
+                                 <label>Select Batch</label>
+                              <div class="form-group">
+                                 <ui-select ng-model="selectedBatch.batch" theme="selectize" ng-disabled="disabled"  ng-change="onInvoiceChange()">
+                                    <ui-select-match placeholder="Select or search batch">{{$select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="batch in batches | filter: $select.search">
+                                       <span ng-bind-html="batch | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                 </ui-select>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label>Quantity</label>
+                              <div class="form-group">
+                                 <input class="form-control" type="text" ng-model="app.quantity"/>
+                              </div>
+                           </div>
+                        </div>
+                        
+                           <div class="row">
+                           <button type="button" class="btn btn-info" ng-click="saveCreditNote(ddt)">SUBMIT</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="js/utils/custom.js"></script>

@@ -1,0 +1,14 @@
+<div>
+   <div class="box-header">
+      <span class="all-header">Shipment Count By Slot</span>
+   </div>
+   <div class="box-body">
+    <div class="row">
+      <div class="col-md-4 col-sm-6"  ng-repeat="slot in slots">
+         <li class="list-group-item">
+            <span class="badge">{{slot.count}}</span>
+            {{slot.startTime}} - {{slot.stopTime}}
+         </li>
+      </div>
+   </div>
+</div>

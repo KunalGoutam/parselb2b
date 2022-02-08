@@ -1,0 +1,223 @@
+<div class="container body">
+<div class="main_container">
+   <div class="right_col" role="main">
+      <div class="">
+         <div class="page-title">
+            <div>
+               <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                     <input type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Search by DE email/phone" ng-model="filterText.text">
+                     <span class="input-group-btn">
+                     <button class="btn btn-default search_button" type="button" ng-click="getDriverDetails()">SEARCH</button>
+                     </span>
+                     <span class="input-group-btn">
+                     <button class="btn btn-default add_driver_button" type="button" ng-click="addNewDriver()">ADD NEW DELIVERY EXECUTIVE</button>
+                     </span>           
+                  </div>
+               </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel" ng-show="isDriverSelected">
+                     <div class="x_title">
+                        <h3>DELIVERY EXECUTIVE</h3>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                        <div class="col-md-6 col-sm-12 col-xs-12 profile_details" ng-repeat="driver in drivers">
+                           <div class="well profile_view col-md-12" style="padding-top: 0px;">
+                              <div class="col-md-12 col-xs-12 bottom">
+                                 <div class="col-md-8 col-xs-12 col-sm-6 emphasis txtHeader">
+                                    <h5>#{{driver.userId}} &nbsp;/&nbsp; {{driver.firstName}} {{driver.lastName}} </h5>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <h5>{{driver.phone}}</h5>
+                                 </div>
+                                 <div class="col-md-2 col-xs-12 col-sm-6 emphasis" style="margin-top: 5px;">
+                                    <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editDriverDetails(driver)"><i class="fa fa-edit"></i> </button>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12 col-md-12">
+                                 <div class="left col-md-12 col-xs-12 col-sm-12">
+                                    <ul class="list-unstyled">
+                                       <li><i class="fa fa-envelope"></i> {{driver.email}} / {{decryptPass(driver.password)}} </li>
+                                       <li><i class="fa fa-motorcycle"></i> {{driver.vehicle.vehicleClass}} /  {{driver.locality}}</li>
+                                       <h5>
+                                          <li> <a ng-click="viewAttendanceDetails(driver)" style="cursor: pointer">VIEW ATTENDANCE DETAILS</a> </li>
+                                       </h5>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12 x_title" ng-show="isAttendanceViewSelected">
+                        <div class="x_title">
+                           <h3>Attendance Details</h3>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                 <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                              </div>
+                           </div>
+                           <div class="col-md-12">
+                              <div id="attendanceChart" style="width:100%;height:350px;"></div>
+                           </div>
+                           <div class="col-md-12">
+                              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                 <div class="tile-stats">
+                                    <div class="icon"><i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <div class="count">{{totalOnlineHours}}</div>
+                                    <h5 class="panel-text">Total Online Hours</h5>
+                                 </div>
+                              </div>
+                              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                 <div class="tile-stats">
+                                    <div class="icon"><i class="fa fa-truck"></i>
+                                    </div>
+                                    <div class="count">{{totalDistance}}</div>
+                                    <h5 class="panel-text">Total Distance</h5>
+                                 </div>
+                              </div>
+                              <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                 <div class="tile-stats">
+                                    <div class="icon"><i class="fa fa-inr"></i>
+                                    </div>
+                                    <div class="count">{{totalConveyanceCharge}}</div>
+                                    <h5 class="panel-text">Total Conveyance Charge</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="delDriverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog delete-modal">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning text-red"></i>&nbsp;Delete driver ?</h4>
+         </div>
+         <div class="modal-body">
+            <span>Are you sure want to delete this driver ?<br> <label>{{driverInfo}}</label> &nbsp; with &nbsp; <label>Driver ID - {{driverId}}</label></span>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteDriver()">Delete</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="driverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog update-modal">
+   <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+         <h4 class="modal-title" id="myModalLabel"><i><img src="assets/images/logo.png"></i>&nbsp;{{modalHeader}}</h4>
+      </div>
+      <div class="modal-body">
+         <form name="RegistrationForm" novalidate>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label id="req">First Name</label>
+                           <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.firstName.$invalid && !RegistrationForm.firstName.$pristine }">
+                              <input type="text" ng-model="input.firstName" class="form-control" name="firstName" required>
+                              <p ng-show="RegistrationForm.firstName.$invalid && !RegistrationForm.firstName.$pristine" class="help-block">FirstName is required.</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <label>Last Name</label>
+                        <div class="form-group">
+                           <input type="text" ng-model="input.lastName" class="form-control" name="lastName">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label id="req">Phone Number</label>
+                           <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.phone.$invalid && !RegistrationForm.phone.$pristine }">
+                              <input type="number" ng-model="input.phone" class="form-control" name="phone" required>
+                              <p ng-show="RegistrationForm.phone.$invalid && !RegistrationForm.phone.$pristine" class="help-block">Phone Number is required.</p>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label id="req">Password</label>
+                           <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.password.$invalid && !RegistrationForm.password.$pristine }">
+                              <input type="text" ng-model="input.password" class="form-control" name="password" required>
+                              <p ng-show="RegistrationForm.password.$invalid && !RegistrationForm.password.$pristine" class="help-block">Password is required.</p>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+                  <div class="row">
+                    
+                     <div class="col-md-6">
+                        <label id="req">Vehicle Size</label>
+                        <div class="form-group">
+                           <select ng-model="input.vehicle" class="form-control" ng-options="vehicle.name for vehicle in vTypes2">
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <label id="req">Vehicle Number</label>
+                        <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.vNumber.$invalid && !RegistrationForm.vNumber.$pristine }">
+                           <input type="text" ng-model="input.vNumber" class="form-control" name="vNumber" required>
+                           <p ng-show="RegistrationForm.vNumber.$invalid && !RegistrationForm.vNumber.$pristine" class="help-block">Vehicle number is required.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                    
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label>Refigerated/Non-Refigerated</label>
+                           <div class="form-group">
+                              <select ng-model="input.refigerated" class="form-control" ng-options="vehicle.name for vehicle in vTypes3">
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" value=""  ng-model="input.adHocDriver"  id="flexCheckDefault" />
+                     <label class="form-check-label" for="flexCheckDefault" style="font-size:13px;text-transform:none">Mark as Adhoc Driver</label>
+                   </div>
+                 
+                  <div class="col-md-4" ng-show="false">
+                     <div class="form-group">
+                        <input type="file" id="txtFileUpload" accept="image/*"/>
+                     </div>
+                  </div>
+               </div>
+         </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="RegistrationForm.$invalid" ng-click="saveDriverDetails()">{{footerText}}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteDriverDetails(selectedDriver.driver)">Delete</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="js/utils/custom.js"></script>
