@@ -30,7 +30,7 @@
                               </div>
 
                               <div class="col-md-3" ng-hide = 'hideDA'>
-                                 <label>Select DA</label>
+                                 <label>Select DE</label>
                                   <div class="form-group">
                                                    <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled" ng-change="setDriver()">
                                                       <ui-select-match placeholder="Select or search DE">{{$select.selected.firstName}} {{$select.selected.lastName}}</ui-select-match>
@@ -73,7 +73,7 @@
                            <div class="row">
                               <div class="col-md-10">
                                  <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="txt.searchTxt" placeholder="Search by Order Id/Order Number/Delivery ID" ng-change="resetShipments()"/>
+                                    <input type="text" class="form-control" ng-model="txt.searchTxt" placeholder="Search" ng-change="resetShipments()"/>
                                  </div>
                               </div>
                               <div class="col-md-2">

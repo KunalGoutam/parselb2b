@@ -366,6 +366,18 @@ myApp.factory('DriversService', ['RESTService', '$rootScope', function(RESTServi
         sendtoSAP: function(input, successCallBack, errorCallBack) {
             var url = $rootScope.baseUrl + '/adm/sendsap';
             RESTService.post(url, input, null, successCallBack, errorCallBack);
+        },
+        getDC: function(input, successCallBack, errorCallBack) {
+            var url = $rootScope.baseUrl + '/drivr/getDCbyUserId?managerId='+input.managerId;
+            RESTService.get(url, input, null, successCallBack, errorCallBack);
+        },
+        createRoute: function(input, successCallBack, errorCallBack) {
+            var url = $rootScope.baseUrl + '/drivr/createRoute';
+            RESTService.post(url, input, null, successCallBack, errorCallBack);
+        },
+        getListOfStores: function(input, successCallBack, errorCallBack) {
+            var url = $rootScope.baseUrl + '/drivr/getStoresByDc?dc='+input.dc;
+            RESTService.get(url, input, null, successCallBack, errorCallBack);
         }
     };
 }]);
@@ -385,6 +397,10 @@ myApp.factory('ManagersService', ['RESTService', '$rootScope', function(RESTServ
     return {
         getAllManagers: function(input, successCallBack, errorCallBack) {
             var url = $rootScope.baseUrl + '/sadm/allmanagers';
+            RESTService.post(url, input, null, successCallBack, errorCallBack);
+        },
+        addManager: function(input, successCallBack, errorCallBack) {
+            var url = $rootScope.baseUrl + '/sec/register1';
             RESTService.post(url, input, null, successCallBack, errorCallBack);
         },
         getDriversForManager: function(input, successCallBack, errorCallBack) {
@@ -407,6 +423,15 @@ myApp.factory('CommonService', ['RESTService', '$rootScope', function(RESTServic
         },
         getHubs: function(input, successCallBack, errorCallBack) {
             var url = $rootScope.baseUrl + '/adm/fkhubs';
+            RESTService.post(url, input, null, successCallBack, errorCallBack);
+        },
+        getAdhocDriver: function(input, successCallBack, errorCallBack) {
+            var url = $rootScope.baseUrl + '/sadm/getActiveInactiveDrivers ';
+            RESTService.post(url, input, null, successCallBack, errorCallBack);
+        },
+        approveAdhocDriver: function(input, successCallBack, errorCallBack) {
+            console.log(input);
+            var url = $rootScope.baseUrl + '/sadm/updateDriverFlag?driverId='+input.driverId+'&flagType='+input.flagType ;
             RESTService.post(url, input, null, successCallBack, errorCallBack);
         }
     };

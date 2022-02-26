@@ -23,7 +23,7 @@
                            <label>Add Route</label>
                             <div class="form-group">
                               <input type="text" class="form-control" ng-model="date.route"/>
-                                          </div>
+                           </div>
                            </div>
                           
                          
@@ -34,11 +34,18 @@
                             <div class="col-md-3">
                            <label>Select DC</label>
                             <div class="form-group">
-                                             <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled" ng-change="setDriver()">
+                                             <!-- <ui-select ng-model="selectedDriver.driver" theme="selectize" ng-disabled="disabled" ng-change="setDriver()">
                                                 <ui-select-match placeholder="Select or search DE">PALWAL</ui-select-match>
                                                 <ui-select-choices repeat="driver in drivers | filter: $select.search">
                                                    <span ng-bind-html="driver.firstName | highlight: $select.search"></span>
                                                    <span ng-bind-html="driver.lastName | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                             </ui-select> -->
+
+                                             <ui-select ng-model="selectedDc.dc" theme="selectize" ng-disabled="disabled" on-select="fetchStoreData(selectedDc.dc)"  >
+                                                <ui-select-match   placeholder="Select or search DE">{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="dc in dcList | filter: $select.search">
+                                                   <span ng-bind-html="dc | highlight: $select.search"></span>                                                 
                                                 </ui-select-choices>
                                              </ui-select>
                                           </div>
@@ -61,13 +68,13 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr>
+                                    <tr ng-repeat = " storeInfo in iterateStoreInfo">
                                   
                                      
-                                       <td style="width: 10%"> <input type="checkbox" type="checkbox"  /> FAASOS</td>
+                                       <td style="width: 10%"> <input type="checkbox" type="checkbox" ng-click="submitSelectedStore(this)" /> {{storeInfo[0]}}</td>
                                      
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                        <td style="width: 10%"><input type="checkbox" type="checkbox"  /> McDonalds</td>
                                      
                                     </tr>
@@ -82,7 +89,7 @@
                                     <tr>
                                        <td style="width: 10%"> <input type="checkbox" type="checkbox"  /> Subway</td>
                                      
-                                    </tr>
+                                    </tr> -->
                                  </tbody>
                               </table>
                            </div>

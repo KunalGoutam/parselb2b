@@ -16,7 +16,7 @@ var managersController = myApp.controller('ManagersController', ['$scope', 'CONS
     $scope.selectedManager = {manager : {}};
     $scope.cities = CITIES.city_list;
     $scope.manager = MANAGER_TYPES.manager_list;
-
+    $scope.multicity = [];
     $scope.input = {
         "firstName" : "",
         "lastName": "",
@@ -26,7 +26,24 @@ var managersController = myApp.controller('ManagersController', ['$scope', 'CONS
         "city": $scope.cities[0],
         "manager": $scope.manager[0]
     };
-    
+    $scope.multicities = [
+        {
+        "label": "PALWAL",
+        "id": "0"
+        },
+        {
+        "label": "BALLABHGARH",
+        "id": "1"
+        },
+        {
+        "label": "SOHNA",
+        "id": "2"
+        },
+        {
+        "label": "MANESAR",
+        "id": "3"
+        }
+    ]
     $scope.filterText = {"text": ""};
     $scope.isManagerSelected = false;
     $scope.isCompletedTripsSelected = false;
@@ -54,7 +71,8 @@ var managersController = myApp.controller('ManagersController', ['$scope', 'CONS
             "password": $scope.input.password,
             "email": $scope.input.email,
             "phone": $scope.input.phone,
-            "locality": $scope.input.city.name
+            "locality": $scope.input.city.name,
+            "locality1": $scope.select.cities.name.id
         };
 
         RegistrationService.register(input, $scope.regSC, $scope.regEC);

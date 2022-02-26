@@ -1,4 +1,4 @@
-<div class="container body">
+<div class="container body" ng-init="get_DE()">
 <div class="main_container">
    <div class="right_col" role="main">
       <div class="">
@@ -10,19 +10,21 @@
                   <div class="x_panel" >
                      <div class="x_title">
                         <h3>APPROVE ADHOC DE</h3>
+
+                        <h4>{{dataNotAvail}}</h4>
                         <div class="clearfix"></div>
                      </div>
                      <div class="x_content">
                         <div class="col-md-6 col-sm-12 col-xs-12 profile_details">
-                           <div ng-hide = "hideT1" class="well profile_view col-md-12" style="padding-top: 0px;">
+                           <div ng-hide = "hideT1" class="well profile_view col-md-12" style="padding-top: 0px;" ng-repeat = "adHocDriverdata in  adHocDriverData">
 
 
                               <div class="col-md-12 col-xs-12 bottom">
                                  <div class="col-md-8 col-xs-12 col-sm-6 emphasis txtHeader">
-                                    <h5 class="ng-binding">#12622 &nbsp;/&nbsp; Arvind Patel </h5>
+                                    <h5 class="ng-binding">{{adHocDriverdata.userId}} &nbsp;/&nbsp; {{adHocDriverdata.firstName}} </h5>
                                  </div>
                                  <div class="col-md-2">
-                                    <h5 class="ng-binding">9823491282</h5>
+                                    <h5 class="ng-binding">{{adHocDriverdata.phone}}</h5>
                                  </div>
                                  <div class="col-md-2 col-xs-12 col-sm-6 emphasis" style="margin-top: 5px;">
                                     <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editDriverDetails(driver)"><i class="fa fa-edit"></i> </button>
@@ -31,13 +33,13 @@
                               <div class="col-sm-12 col-md-12">
                                  <div class="left col-md-12 col-xs-12 col-sm-12">
                                     <ul class="list-unstyled">
-                                       <li class="ng-binding"> Size: 4T</li>
-                                       <li class="ng-binding">Vehicle No : MH03CH0242</li>
+                                       <li class="ng-binding"> Size: {{adHocDriverdata.vechile.vehicleSize}}</li>
+                                       <li class="ng-binding">Vehicle No : {{adHocDriverdata.vechile.vehicleNo}}</li>
                                           
                                     </ul>
                                    
-                                       <button type="button" ng-click = "approveAdhoc()" class="btn btn-primary">Aprove</button>
-                                       <button type="button" ng-click = "rejectAdhoc('hideT1')" class="btn btn-danger">Reject</button>
+                                       <button type="button" ng-click = "approveAdhoc(this)" class="btn btn-primary">Aprove</button>
+                                       <button type="button" ng-click = "rejectAdhoc(this)" class="btn btn-danger">Reject</button>
                                    
                                  </div>
                               </div>                             
@@ -45,34 +47,7 @@
 
                            <!--  -->
 
-                           <div ng-hide = "hideT2" class="well profile_view col-md-12" style="padding-top: 0px;">
-
-
-                              <div class="col-md-12 col-xs-12 bottom">
-                                 <div class="col-md-8 col-xs-12 col-sm-6 emphasis txtHeader">
-                                    <h5 class="ng-binding">#12663 &nbsp;/&nbsp; Manish </h5>
-                                 </div>
-                                 <div class="col-md-2">
-                                    <h5 class="ng-binding">9326191362</h5>
-                                 </div>
-                                 <div class="col-md-2 col-xs-12 col-sm-6 emphasis" style="margin-top: 5px;">
-                                    <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editDriverDetails(driver)"><i class="fa fa-edit"></i> </button>
-                                 </div>
-                              </div>
-                              <div class="col-sm-12 col-md-12">
-                                 <div class="left col-md-12 col-xs-12 col-sm-12">
-                                    <ul class="list-unstyled">
-                                       <li class="ng-binding"> Size: 4T</li>
-                                       <li class="ng-binding">Vehicle No : MH03CH0122</li>
-                                          
-                                    </ul>
-                                   
-                                       <button type="button" ng-click = "approveAdhoc()" class="btn btn-primary">Aprove</button>
-                                       <button type="button" ng-click = "rejectAdhoc('hideT2')" class="btn btn-danger">Reject</button>
-                                   
-                                 </div>
-                              </div>                             
-                           </div>
+                          
                         </div>
                      </div>
                      <div class="col-md-12 x_title" ng-show="isAttendanceViewSelected">

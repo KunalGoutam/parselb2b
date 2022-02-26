@@ -2078,7 +2078,7 @@ Date.CultureStrings.lang = "is-IS";
 				var temp = this.clone().moveToLastDayOfMonth();
 				this.moveToNthOccurrence(n, ntemp);
 				if (this > temp) {
-					throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + $D.getMonthName(temp.getMonth()) + " " + temp.getFullYear() + ".");
+					throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + $D.getMonthName(temp.getMonth()) + " " + temp.getFullYear()+ ".");
 				}
 				return this;
 			}

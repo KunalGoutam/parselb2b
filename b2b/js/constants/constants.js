@@ -85,39 +85,17 @@ constants.constant('APP', {
 });
 constants.constant('CITIES', {
     city_list: [
-        { name: 'AHMEDABAD' },
-        { name: 'BANGALORE' },
-        { name: 'CHENNAI' },
-        { name: 'COIMBATORE' },
-        { name: 'DELHI' },
-        { name: 'INDORE' },
-        { name: 'JAIPUR' },
-        { name: 'KOCHI' },
-        { name: 'KOLKATA' },
-        { name: 'LUCKNOW' },
-        { name: 'MADURAI' },
-        { name: 'MUMBAI' },
-        { name: 'PUNE' },
-        { name: 'RAIPUR' },
-        { name: 'RANCHI' },
-        { name: 'ROG' },
-        { name: 'ROI' },
-        { name: 'ROK' },
-        { name: 'ROKE' },
-        { name: 'ROM' },
-        { name: 'ROR' },
-        { name: 'ROTN' },
-        { name: 'SALEM' },
-        { name: 'SURAT' },
-        { name: 'TRIVANDRUM' },
-        { name: 'UTTAR PRADESH' }
+        { name: 'PALWAL' },
+        { name: 'BALLABHGARH' },
+        { name: 'SOHNA' },
+        { name: 'MANESAR' }
     ]
 });
 
 constants.constant('MANAGER_TYPES', {
     manager_list: [
         { name: 'Ops Manager' },
-        { name: 'Dc Manager' },
+        { name: 'DC Manager' },
         { name: 'Dispatch Executive' }
     ]
 });

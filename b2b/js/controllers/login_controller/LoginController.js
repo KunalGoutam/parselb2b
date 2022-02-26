@@ -31,6 +31,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                 if (data.responseCode === "1000") {
                     if (data.user.userType === 2) {
                         $rootScope.username = data.user.username;
+                        $rootScope.locality = data.user.locality;
                         $rootScope.userId = data.user.userId;
                         $rootScope.userType = data.user.userType;
                         $rootScope.appId = data.app.appId;
@@ -41,7 +42,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         data.user.app.clientId = data.clientId;
                         HelperService.set("pvruser", angular.toJson(data.user));
                         //$state.go('b2b.dashboard.shipments'); 
-                        if (data.app.appId == 7) {
+                        if (data.app.appId == 7 || data.app.appId == 0) {
                             $state.go('b2b.dashboard.shipments'); 
                         } if (data.app.appId == 3) {
                             $state.go('b2b.dashboard.jioshipments'); 
@@ -51,6 +52,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                     }else   if (data.user.userType === 8) {
                         $rootScope.username = data.user.username;
                         $rootScope.userId = data.user.userId;
+                        $rootScope.locality = data.user.locality;
                         $rootScope.appId = data.app.appId;
                         $rootScope.isOneTouchUser = false;
                         $rootScope.clientId = data.clientId;
@@ -59,7 +61,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         $rootScope.userType = data.user.userType;
                         data.user.app.clientId = data.clientId;
                         HelperService.set("pvruser", angular.toJson(data.user));
-                        if (data.app.appId == 7) {
+                        if (data.app.appId == 7 || data.app.appId == 0) {
                             $state.go('b2b.dashboard.shipments'); 
                         } if (data.app.appId == 3) {
                             $state.go('b2b.dashboard.jioshipments'); 
@@ -70,6 +72,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         $rootScope.username = data.user.username;
                         $rootScope.userId = data.user.userId;
                         $rootScope.appId = data.app.appId;
+                        $rootScope.locality = data.user.locality;
                         $rootScope.isOneTouchUser = false;
                         $rootScope.clientId = data.clientId;
                         $rootScope.userType = data.user.userType;
@@ -77,7 +80,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         data.user.app = data.app;
                         data.user.app.clientId = data.clientId;
                         HelperService.set("pvruser", angular.toJson(data.user));
-                        if (data.app.appId == 7) {
+                        if (data.app.appId == 7 || data.app.appId == 0) {
                             $state.go('b2b.dashboard.shipments'); 
                         } if (data.app.appId == 3) {
                             $state.go('b2b.dashboard.jioshipments'); 
@@ -88,6 +91,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         $rootScope.username = data.user.username;
                         $rootScope.userId = data.user.userId;
                         $rootScope.appId = data.app.appId;
+                        $rootScope.locality = data.user.locality;
                         $rootScope.isOneTouchUser = false;
                         $rootScope.userType = data.user.userType;
                         $rootScope.clientId = data.clientId;
@@ -95,7 +99,7 @@ var shipmentController = myApp.controller('LoginController', ['$rootScope', '$sc
                         data.user.app = data.app;
                         data.user.app.clientId = data.clientId;
                         HelperService.set("pvruser", angular.toJson(data.user));
-                        if (data.app.appId == 7) {
+                        if (data.app.appId == 7 || data.app.appId == 0) {
                             $state.go('b2b.dashboard.shipments'); 
                         } if (data.app.appId == 3) {
                             $state.go('b2b.dashboard.jioshipments'); 

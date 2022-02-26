@@ -16,6 +16,11 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
         $scope.selectedDriver = {
             "driver": {}
         };
+
+        $scope.selectedDc = {
+            "dc": ''
+        };
+
         $scope.app = {
             "pwd": ''
         };
@@ -67,7 +72,7 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
             var input = angular.toJson({
 
                 "date": formatDate($scope.date.fromDate),
-                "slotId": $scope.selectedSlot.mainSlot.slotId,
+                "slotId": 28,
                 "route": ($scope.selectedRoute.route == 'All') ? '' : $scope.selectedRoute.route,
                 "type": 1
 
@@ -265,21 +270,9 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
             $scope.selectedRoute.route = selectedRoute;
         };
 
-        $scope.submitAdhocRoute = function() {
-            showAlert(CONSTANT.SUCCESS, "Route Submitted for approval");
-        }
+      
 
-        $scope.approveAdhoc= function() {
-            showAlert(CONSTANT.SUCCESS, "Driver approved");
-        }
-        $scope.rejectAdhoc= function(obj) {
-            showAlert(CONSTANT.SUCCESS, "Driver rejected");
-            if(obj == 'hideT1' ){
-                $scope.hideT1 = true;
-            }else if(obj == 'hideT2'){
-                $scope.hideT2 = true;
-            }
-        }
+       
         /**
          * This method assigns the shipment to selected driver
          * 
@@ -292,8 +285,8 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
                 return;
             }
 
-            if ($scope.selectedVehicle.vehicle == null || $scope.selectedVehicle.vehicle == undefined ||
-                !$scope.selectedVehicle.vehicle.vehicleNo) {
+            if ($scope.selectedDriver.vechile.vehicleNo == null || $scope.selectedDriver.vechile.vehicleNo == undefined ||
+                !$scope.selectedDriver.vechile.vehicleNo) {
                 showAlert(CONSTANT.ERROR, "Select Vehicle");
                 return;
             }
@@ -310,7 +303,7 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
             var input = angular.toJson({
                 "assignmentMap": map,
                 "tjuk": 1,
-                "vehicle": $scope.selectedVehicle.vehicle
+                "vehicle": {"vehicleId": $scope.selectedDriver.vechile.vehicleNo.vechile.vehicleId,"vehicleNo":$scope.selectedDriver.vechile.vehicleNo.vechile.vehicleNo}
             });
             console.log(input);
             ShipmentService.assignShipments(input, $scope.assignShipmentsSC, $scope.assignShipmentsEC);
@@ -331,6 +324,74 @@ var pbb7assignShipmentController = myApp.controller('Pbb7AssignShipmentControlle
             NProgress.done();
             showAlert(CONSTANT.ERROR, "Internal Error. Failed to assign shipments to drivers");
         };
+
+        //API to get List of DC's
+        $scope.getListOfDc = function(){
+            var input = {
+             "managerId" :  $rootScope.userId
+            };
+
+            DriversService.getDC(input, $scope.getDCListSC, $scope.getDCListEC);
+        }
+
+        $scope.getDCListSC = function(data) {
+            if (data.responseCode == "1000") {
+                console.log(data.dc);
+                $scope.dcList =(data.dc.replace(/[\[\]']+/g,'')).split(',');
+              }
+        }
+
+        $scope.submitAdhocRoute = function() {
+            var input = {
+                "routeName":$scope.date.route,
+                "managerId":$rootScope.userId,
+                "dc":$scope.selectedDc.dc,
+                "routeType":1,
+                "stores":$scope.selectedStore
+            };
+                 console.log(input);
+               DriversService.createRoute(input, $scope.adHocRouteSubmissionSC, $scope.adHocRouteSubmissionEC);
+        }
+
+        $scope.adHocRouteSubmissionSC = function(data) {
+            if (data.responseCode == "1000") {
+                console.log(data);  
+                showAlert(CONSTANT.SUCCESS, "Successfully submitted.");             
+              }
+        }
+
+        $scope.fetchStoreData = function(selectedDC) {
+            var input = {
+               "dc":selectedDC.trim()
+              }
+              console.log(input);
+              DriversService.getListOfStores(input, $scope.fetchStoreDataSC, $scope.fetchStoreDataEC);
+        }
+        $scope.fetchStoreDataSC = function(data) {
+            if (data.dc!=null) {
+                console.log(data.storeInfo );
+                $scope.storeInfo =  data.storeInfo;
+                 var storeInfoData = {};
+                for(var i =0; i< $scope.storeInfo.length ; i++){
+                    storeInfoData[i] =  Object.values($scope.storeInfo[i]);    
+                }
+              //  $scope.storeInfoData =  Object.values($scope.storeInfo);       
+                console.log(storeInfoData); 
+                $scope.iterateStoreInfo = storeInfoData;
+              }
+        }
+        $scope.selectedStore = [];
+        $scope.submitSelectedStore = function(obj){
+            console.log(obj);
+           
+            $scope.selectedStore.push(obj.storeInfo[0]);
+
+            console.log($scope.selectedStore);
+        }
+
+
+
+        $scope.getListOfDc();
 
         $scope.getSHubs = function() {
             console.log("Get Hubs");

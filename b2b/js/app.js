@@ -20,6 +20,7 @@ var myApp = angular.module('myApp', [
     'ngSanitize',
     'ui.select',
     'smart-table',
+    'angularjs-dropdown-multiselect',
    
 ]);
 
@@ -141,7 +142,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $
         }).state('b2b.dashboard.approve_adhoc_drivers', {
             url: '/approve_adhoc_drivers',
             templateUrl: 'partials/approve_adhoc_driver/approve_adhoc_drivers.html',
-            controller: 'Pbb7AssignShipmentController'
+            controller: 'DriversController'
         }).state('b2b.dashboard.confirm_dispatch', {
             url: '/confirm_dispatch',
             templateUrl: 'partials/confirm_dispatch/confirm_dispatch.html',

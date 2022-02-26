@@ -245,7 +245,7 @@ $scope.vTypes3 = [{
             "vehicleType": $scope.input.vehicle.id,
             "vehicleNo": $scope.input.vNumber,
             "chassisNo": $scope.input.cNumber,
-            "locality": $scope.input.city.name,
+            "locality": $rootScope.locality,
             "managerId": $rootScope.userId,//$scope.selectedManager.manager.userId,
             "dr": {"ecom": $scope.input.eRate, "other": $scope.input.oRate},
             "vehicleSize": $scope.input.vehicle.name,
@@ -522,6 +522,60 @@ $scope.vTypes3 = [{
 
         }
     };
+
+    $scope.get_DE = function(){
+            console.log("Printing De");
+            
+            var input = angular.toJson({"date":"2022-01-31","toDate":null,
+            "managerId":$rootScope.userId,"locality":$rootScope.locality,"index":-1,"count":-1,"type":1});
+            CommonService.getAdhocDriver(input, $scope.getAdhocDriverSC, $scope.getAllManagersEC);
+    }
+
+    $scope.getAdhocDriverSC = function(data) {
+        if (data.responseCode === "1000") {
+            if(data.drivers.length == 0){
+                $scope.dataNotAvail = "Data not available.";
+            }else{
+                $scope.dataNotAvail = " ";
+            }
+            $scope.adHocDriverData = data.drivers;
+        } 
+    };
+
+    $scope.approveAdhoc= function(obj) {
+        console.log(obj);
+       var data = obj.adHocDriverdata;
+       var input = {"driverId":data.userId,"flagType":1};
+       CommonService.approveAdhocDriver(input, $scope.approveDriverSC, $scope.getAllManagersEC);
+       
+    }
+
+    $scope.approveDriverSC = function(data) {
+        if (data == true) {
+            showAlert(CONSTANT.SUCCESS, "Driver approved");
+            $scope.get_DE();
+        } 
+    };
+
+
+    $scope.rejectAdhoc= function(obj) {
+        showAlert(CONSTANT.SUCCESS, "Driver rejected");
+        console.log(obj);
+        var data = obj.adHocDriverdata;
+        var input = {"driverId":data.userId,"flagType":4};
+        CommonService.approveAdhocDriver(input, $scope.rejectDriverSC, $scope.getAllManagersEC);
+    }
+
+    
+    $scope.rejectDriverSC = function(data) {
+        if (data == true) {
+            showAlert(CONSTANT.SUCCESS, "Driver Rejected");
+            $scope.get_DE();
+        } 
+    };
+
+  
+
     $scope.resetGraphDetails = function() {
         $scope.dateArr = [];
         $scope.onlineMinsArr = [];

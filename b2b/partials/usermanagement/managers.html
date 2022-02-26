@@ -177,19 +177,31 @@
                      
                      </div>
                      <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                            <label id="req">Select Dc</label>
                            <div class="form-group">
                               <select ng-model="input.city" class="form-control" ng-options="city.name for city in cities">
                               </select>
 
 
-                              <div ng-dropdown-multiselect="" options="example14data" selected-model="example14model" 
+                              <!-- <div ng-dropdown-multiselect="" options="example14data" selected-model="example14model" 
+                              checkboxes="true" extra-settings="setting1"></div > -->
+
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <label id="req">Select Dc1</label>
+                           <div class="form-group">
+                              <!-- <select multiple ng-model="input.city" class="form-control" ng-options="city.name for city in cities">
+                              </select> -->
+
+
+                              <div ng-dropdown-multiselect="" options="multicities" selected-model="multicity" 
                               checkboxes="true" extra-settings="setting1"></div >
 
                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                            <div class="form-group">
                               <label id="req">Employee Id</label>
                               <div class="form-group" ng-class="{ 'has-error' : RegistrationForm.gst.$invalid && !RegistrationForm.gst.$pristine }">
